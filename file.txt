@@ -1,0 +1,20 @@
+* Array-based implementation:
+        Time complexity for push and pop operations: O(1)
+        Time complexity for peek operation: O(1)
+        Space complexity: O(n)
+* Linked list-based implementation:
+        Time complexity for push and pop operations: O(1)
+        Time complexity for peek operation: O(1)
+        Space complexity: O(n)
+
+
+* excellent algorithm, clean code and good understanding of the project requirement, 
+    pay attention on the memory management , good luck next time
+
+
+
+==============Longest Increasing Subsequence============
+* Subsequence : sous-séquence est une séquence dans un tableau qui pourrait
+                ne pas être contiguë
+la plus longue sous-séquence croissante dans un tableu 
+
