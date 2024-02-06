@@ -6,7 +6,7 @@
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 23:26:18 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/06 01:09:40 by aben-cha         ###   ########.fr       */
+/*   Updated: 2024/02/06 01:32:20 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -396,17 +396,25 @@ void move_number_to_top(t_stack *s, int option, int val_to_move)
     index = get_index_of_node(s, val_to_move);
     if(option == 0) // ra
     {
-        int index = get_index_of_node(s, val_to_move);
-        
+        while(index--)
+            ra(&s);
+        // ft_putstr("ra\n");
+        display_a(s);
+
     }
     else if(option == 1) //rra
     {
-        
+        size = size - index;
+        while(--size)
+            printf("test\n");
+            rra(&s);
+        // ft_putstr("rra\n");
+        display_a(s);
     }
     else
     {
-        // do nothing 
         printf("do nothing \n");
+        return ;
     }
         
 }
@@ -512,10 +520,12 @@ int main(int ac, char **av)
         // ft_parsing(av[i], ' ');
         ft_lstadd_back(&a, new);
     }
-    insertion_sort(&a, &b);
+    // insertion_sort(&a, &b);
     display_a(a);
-    display_b(b);
+    move_number_to_top(a, 2, 5);
+
+    // display_b(b);
     ft_lstclear(&a);
-    ft_lstclear(&b);
+    // ft_lstclear(&b);
     return (0);
 }
