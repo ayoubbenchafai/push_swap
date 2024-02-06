@@ -6,7 +6,7 @@
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 23:26:18 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/06 01:36:03 by aben-cha         ###   ########.fr       */
+/*   Updated: 2024/02/06 18:52:15 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -383,7 +383,7 @@ int get_max(t_stack *a, int val)
 }
 
 
-void move_number_to_top(t_stack *s, int option, int val_to_move)
+void move_number_to_top(t_stack **s, int option, int val_to_move)
 {
     int index;
     int size;
@@ -392,30 +392,27 @@ void move_number_to_top(t_stack *s, int option, int val_to_move)
     if(!s)
         return ;// return -1
     i = -1;
-    size = ft_lstsize(s);
-    index = get_index_of_node(s, val_to_move);
+    size = ft_lstsize(*s);
+    index = get_index_of_node(*s, val_to_move);
     if(option == 0) // ra
     {
         while(index--)
-            ra(&s);
-        // ft_putstr("ra\n");
-        display_a(s);
-
+        {
+            ra(s);
+            ft_putstr("ra\n");            
+        }
     }
     else if(option == 1) //rra
     {
         size = size - index;
-        while(--size)
-            rra(&s);
-        // ft_putstr("rra\n");
-        display_a(s);
+        while(size--)
+        {
+            rra(s);
+            ft_putstr("rra\n");
+        }
     }
     else
-    {
-        printf("do nothing \n");
         return ;
-    }
-        
 }
 int move_node(t_stack *s, int val)
 {
@@ -480,26 +477,47 @@ void insertion_sort(t_stack **a, t_stack **b)
     else
     {
         int i = -1;
-        // while(++i < size - 3)
-        pb(a, b);
-        pb(a, b);
-        pb(a, b);
+        
+        while(++i < size - 3)
+        {
+            pb(a, b);
+            ft_putstr("pb\n");                    
+        }
+        sort_three(a);
         t_stack *tmp = *b;
+       
+
         while(tmp)
         {
             t_node node = best_move(*a, *b, tmp->data);
+            move_number_to_top(b, node.move_b, node.val_b);
+            move_number_to_top(a, node.move_a, node.val_a);
+            pa(a, b);
+            ft_putstr("pb\n");
 
-            printf("val_a : %d\n",node.val_a);
-            printf("val_b : %d\n",node.val_b);
-            printf("cost_a : %d\n",node.cost_a);
-            printf("cost_b : %d\n",node.cost_b);
-            printf("cost_ab : %d\n",node.cost_ab);
-            printf("move_a : %d\n",node.move_a);
-            printf("move_b : %d\n",node.move_b);
-            printf("-----------------------\n");
+            // printf("-----------------------\n");
+            // printf("val_a : %d\n",node.val_a);
+            // printf("val_b : %d\n",node.val_b);
+            // printf("cost_a : %d\n",node.cost_a);
+            // printf("cost_b : %d\n",node.cost_b);
+            // printf("cost_ab : %d\n",node.cost_ab);
+            // printf("move_a : %d\n",node.move_a);
+            // printf("move_b : %d\n",node.move_b);
+            // printf("-----------------------\n");
             tmp = tmp->next;
         }
-        // sort_three(a);
+        
+
+        int min_a = min_stack_a(*a);
+      
+        int index = get_index_of_node(*a, min_a);
+
+        while(index--)
+        {
+            ra(a);
+            ft_putstr("ra\n");
+        }
+        // display_a(*a);
     }
 }
 
@@ -519,12 +537,7 @@ int main(int ac, char **av)
         // ft_parsing(av[i], ' ');
         ft_lstadd_back(&a, new);
     }
-    // insertion_sort(&a, &b);
-    display_a(a);
-    move_number_to_top(a, 1, 4);
-
-    // display_b(b);
+    insertion_sort(&a, &b);
     ft_lstclear(&a);
-    // ft_lstclear(&b);
     return (0);
 }
