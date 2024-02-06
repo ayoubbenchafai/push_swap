@@ -6,7 +6,7 @@
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 23:26:18 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/06 01:32:20 by aben-cha         ###   ########.fr       */
+/*   Updated: 2024/02/06 01:36:03 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -406,7 +406,6 @@ void move_number_to_top(t_stack *s, int option, int val_to_move)
     {
         size = size - index;
         while(--size)
-            printf("test\n");
             rra(&s);
         // ft_putstr("rra\n");
         display_a(s);
@@ -522,7 +521,7 @@ int main(int ac, char **av)
     }
     // insertion_sort(&a, &b);
     display_a(a);
-    move_number_to_top(a, 2, 5);
+    move_number_to_top(a, 1, 4);
 
     // display_b(b);
     ft_lstclear(&a);
