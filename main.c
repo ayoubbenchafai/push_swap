@@ -6,7 +6,7 @@
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 23:26:18 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/04 22:22:36 by aben-cha         ###   ########.fr       */
+/*   Updated: 2024/02/06 01:09:40 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,6 @@ void swap(int *a, int *b)
     *a = *b;
     *b = tmp;
 }
-
 void sa(t_stack **a)
 {
     int size;
@@ -136,9 +135,7 @@ void sa(t_stack **a)
     if(size <= 1)
         return ;
     swap(&(*a) ->data, &(*a)->next->data);
-    ft_putstr("sa\n");
 }
-
 void sb(t_stack **b)
 {
     int size;
@@ -147,125 +144,98 @@ void sb(t_stack **b)
     if(size <= 1)
         return ;
     swap(&(*b) ->data, &(*b)->next->data);
-    ft_putstr("sb\n");
-
 }
-
 void ss(t_stack **a, t_stack **b)
 {
     sa(a);
     sa(b);
-    ft_putstr("ss\n");
 }
-
-void ft_lstdel_front(t_stack **lst)
-{
-    if(!lst)
-        return ;
-    t_stack *ptr;
-
-    ptr = *lst;
-    *lst = (*lst) -> next;
-    free(ptr);
-}
-
 void pb(t_stack **a, t_stack **b)
 {
     if(!(*a))
         return ;
-    t_stack * new = ft_lstnew((*a)->data);
+    t_stack * new;
+    
+    new = ft_lstnew((*a)->data);
     if(!new)
         return ;
     ft_lstadd_front(b, new);
     ft_lstdel_front(a);
-    ft_putstr("pb\n");  
 }
-
 void pa(t_stack **a, t_stack **b)
 {
     if(!(*b))
         return ;
-    t_stack *new = ft_lstnew((*b)->data);
+    t_stack *new;
+    
+    new = ft_lstnew((*b)->data);
     if(!new) 
         return ;
     ft_lstadd_front(a, new);
     ft_lstdel_front(b);
-    ft_putstr("pa\n");  
 }
-
 void ra(t_stack **a)
 {
+    t_stack *first_elem;
+    t_stack *last_elem;
+    
     if(!(*a))
         return ;
-    t_stack *p = *a;
-    while(p)
-    {
-        t_stack *p1 = p->next;
-        while(p1)
-        {
-            swap(&p->data, &p1->data);
-            p1 = NULL;
-        }
-        // sa(&p);
-        p = p->next;
-    }
-    ft_putstr("ra\n");  
+    first_elem = *a;
+    last_elem = ft_lstlast(*a);
+    (*a) = (*a)->next;
+    last_elem->next = first_elem;
+    first_elem->next = NULL; 
 }
 void rb(t_stack **b)
 {
+    t_stack *first_elem;
+    t_stack *last_elem;
+    
     if(!(*b))
         return ;
-    t_stack * p = *b;
-    while(p)
-    {
-        sb(&p);
-        p = p->next;
-    }
-    ft_putstr("rb\n");  
+    first_elem = *b;
+    last_elem = ft_lstlast(*b);
+    (*b) = (*b)->next;
+    last_elem->next = first_elem;
+    first_elem->next = NULL; 
 }
-
 void rr(t_stack **a, t_stack **b)
 {
     ra(a);
     ra(b);
-    ft_putstr("rr\n");  
 }
-
 void rra(t_stack **a)
 {
+    t_stack *last;
+    t_stack *before_last;
+    
     if(!(*a))
         return ;
-    t_stack *p = *a;
-    t_stack *last = ft_lstlast(*a);
-    while(p)
-    {
-        swap(&last ->data, &p->data);
-        p = p->next;
-    }
-    ft_putstr("rra\n");  
+    last = ft_lstlast(*a);
+    before_last = ft_lst_before_last(*a);
+    last->next = *a;
+    *a = last;
+    before_last->next = NULL;
 }
-
 void rrb(t_stack **b)
 {
+    t_stack *last;
+    t_stack *before_last;
+    
     if(!(*b))
         return ;
-    t_stack *p = *b;
-    t_stack *last = ft_lstlast(*b);
-    while(p)
-    {
-        swap(&last ->data, &p->data);
-        p = p->next;
-    }
-    ft_putstr("rrb\n");  
+    last = ft_lstlast(*b);
+    before_last = ft_lst_before_last(*b);
+    last->next = *b;
+    *b = last;
+    before_last->next = NULL;
 }
-
 void rrr(t_stack **a, t_stack **b)
 {
     rra(a);
     rrb(b);
-    ft_putstr("rrr\n");  
 }
-  
 void sort(int *t, int size)
 {
     int i = 1;
@@ -285,6 +255,7 @@ void sort(int *t, int size)
     }
 }
 
+
 void sort_two(t_stack **a)
 {
     if(!(*a))
@@ -294,6 +265,7 @@ void sort_two(t_stack **a)
     else    
         return ;
 }
+
 void sort_three(t_stack **a)
 {
     if(!(*a))
@@ -411,73 +383,25 @@ int get_max(t_stack *a, int val)
 }
 
 
-// int get_cost(t_stack *s, int val)
-// {
-//     int i;
-//     int c;
-//     int size;   
-//     i = -1;
-//     c = -1;
-//     if(!s)
-//         return (c);
-//     size = ft_lstsize(s);
-//     while(++i < size && s != NULL)
-//     {
-//         if(s->data == val)
-//         {
-//             c = i;
-//             break;             
-//         }
-//         s = s->next;
-//     }
-//     if(c > size - c)
-//     // puts("rra\n");
-//         return (size - c);
-//     // puts("ra\n");
-//     return (c);
-// }
-
-void move_number_to_top(t_stack *s, int val, int val_to_move)
+void move_number_to_top(t_stack *s, int option, int val_to_move)
 {
     int index;
     int size;
     int i;
     
-    // if(!s)
-    //     return (-1);
+    if(!s)
+        return ;// return -1
     i = -1;
     size = ft_lstsize(s);
     index = get_index_of_node(s, val_to_move);
-    if(val == 0) // ra
+    if(option == 0) // ra
     {
-        printf("ra\n");
+        int index = get_index_of_node(s, val_to_move);
+        
     }
-    else if(val == 1) //rra
+    else if(option == 1) //rra
     {
-        // traitetement
-        t_stack *k = s;
-        while(s)
-        {
-            if(s->data == val_to_move)
-            {
-                t_stack *tmp = s;
-                // display_a(tmp);
-                // while(tmp)
-                // {
-                //     t_stack *tmp1 = tmp ->next;
-                //     while(tmp1)
-                //     {
-                //         swap(&(tmp->data), &(tmp1->data));
-                //         tmp1 = NULL;
-                //     }
-                //     // index++;
-                //     tmp = tmp ->next;                    
-                // }
-                ra(&tmp);
-            }
-            s = s->next;
-        }
-        rra(&k);
+        
     }
     else
     {
@@ -552,6 +476,7 @@ void insertion_sort(t_stack **a, t_stack **b)
         // while(++i < size - 3)
         pb(a, b);
         pb(a, b);
+        pb(a, b);
         t_stack *tmp = *b;
         while(tmp)
         {
@@ -587,11 +512,9 @@ int main(int ac, char **av)
         // ft_parsing(av[i], ' ');
         ft_lstadd_back(&a, new);
     }
+    insertion_sort(&a, &b);
     display_a(a);
-    move_number_to_top(a, 1 ,2);
-    display_a(a);
-
-    // insertion_sort(&a, &b);
+    display_b(b);
     ft_lstclear(&a);
     ft_lstclear(&b);
     return (0);
