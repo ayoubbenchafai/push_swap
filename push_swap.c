@@ -6,7 +6,7 @@
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 21:45:32 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/05 23:42:38 by aben-cha         ###   ########.fr       */
+/*   Updated: 2024/02/07 23:05:37 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,20 +109,59 @@ void rra(t_stack **a)
     before_last->next = NULL;
 }
 
+int ft_check(int *t, int size, int val)
+{
+    int i = 0;
+
+    while(i < size)
+    {
+        if(t[i] == val)
+            return (1);
+        i++;
+    }
+    return (0);
+}
+
+void sort_three1(t_stack **a)
+{
+    int a;
+    int b;
+    int c;
+
+    if(!(*a))
+        return;
+    a = *a;
+    b = (*a)->next;
+    c = (*a)->next->next;
+    if((a > b) && (a < c))
+        sa(a);
+    else if((a > b) && (a > c) && (b > c))
+    {
+        sa(a);
+        rra(a);
+    }
+    else if((a > b) && (a > c) && (b < c))
+        ra(a);
+    else if ((a < b) && (a < c) && (b > c))
+    {
+        sa(a);
+        ra(a);
+    }
+    else if((a < b) && (a > c) && (b > c))
+        rra(a);
+}
 int main() {
     t_stack *a = NULL;
     int i = 0;
+    
     int t[6] = {1, 2, 9, 6, 5, 8};
     t_stack *new;
     while(i < 6)
     {
+        if(ft_check(t, 6, t[i]))
         new = ft_lstnew(t[i]);
         ft_lstadd_back(&a, new);
         i++;
     }
-    display_a(a);
-    ra(&a);
-    display_a(a);
-
     return 0;
 }
