@@ -6,7 +6,7 @@
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 22:01:36 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/10 01:42:57 by aben-cha         ###   ########.fr       */
+/*   Updated: 2024/02/12 16:05:11 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,11 @@ void display_a(t_stack *a)
     printf("stack a:\n");
     while(a)
     {
-        printf("   %d\n", a->data);
+        printf("%d ", a->data);
         a = a->next;
     }
+        printf("\n");
+
 }
 void display_b(t_stack *b)
 {
@@ -41,14 +43,14 @@ void display_b(t_stack *b)
 
     while(b)
     {
-        printf("   %d\n", b->data);
+        printf("%d ", b->data);
         b = b->next;
     }
+        printf("\n");
 }
 
 int min_stack_a(t_stack *a)
 {
-    t_stack *tmp;
     if(!(a))
         return (-1);
     int min = a->data;
@@ -372,8 +374,6 @@ void operation2(t_stack **a, t_stack **b, t_node node)
         
         if(i_a == i_b)
         {
-        // printf("test1\n");
-
             while(i_a--)
                 rr(a,b);
         }
@@ -402,13 +402,11 @@ void operation2(t_stack **a, t_stack **b, t_node node)
         
         if(i_a == i_b)
         {
-
             while(i_a--)
                 rrr(a,b);
         }
         else if(i_a > i_b)
         {
-
             int c = i_a - i_b;
             while(i_b--)
                 rrr(a, b);
@@ -417,7 +415,6 @@ void operation2(t_stack **a, t_stack **b, t_node node)
         }
         else if(i_a < i_b)
         {
-
             int c = i_b -i_a;
             while(i_a--)
                 rrr(a, b);
@@ -437,8 +434,9 @@ void get_operation(t_stack **a, t_stack **b, t_node node)
         opeartion1_b(b, node);  
     }
     else
-        operation2(a, b, node);
-    // pa(a, b);
+    {
+        operation2(a, b, node);        
+    }
 }
 void sort_three(t_stack **a)
 {
@@ -487,10 +485,79 @@ t_node choose_best_move_2(t_stack *a, t_stack *b)
         // printf("-----------------------\n");
         tmp = tmp->next;
     }
-
-
     return node;
 }
+
+void final_case(t_stack **a, t_stack **b)
+{
+    t_stack *tmp = *b;
+    int size = ft_lstsize(tmp);
+    t_node node;
+    int i = -1;
+    while(++i < size)
+    {
+        node =choose_best_move_2(*a, *b);
+        get_operation(a, b, node);
+        pa(a, b);
+        // printf("tmp ->data   : %d\n",node.val_b);
+
+        // tmp = tmp ->next;
+    }
+}
+
+void bubble_sort(int *t, int n) 
+{
+    int i = 0;
+    int j;
+    int tmp;
+    while (i < n)
+    {
+        j = i +1;
+        while(j < n)
+        {
+            if (t[i] > t[j])
+            {
+                tmp = t[i];  
+                t[i] = t[j];  
+                t[j] = tmp;
+            }
+            j++;
+        }
+        i++;
+    }
+} 
+
+int get_median(t_stack *stack)
+{
+    int size = ft_lstsize(stack);
+    int *t = malloc(sizeof(int) * size);
+    if(!t)
+       return (-1);
+
+    int i = -1;
+    while(++i < size)
+    {
+        t[i] = stack->data;
+        stack = stack->next;
+    }
+
+    bubble_sort(t, size);
+    // i = 0;
+    // while(i < size)
+    // {
+    //     printf("%d ",t[i]);
+    //     i++;
+    // }
+        // printf("\n");
+    int median = -1;
+    int index_median = (size / 2);
+    median = t[index_median];
+        // printf("median %d\n", median);
+    free(t);
+    return (median);
+            
+}
+
 int main(int ac, char *av[])
 {
     t_stack *a;
@@ -508,66 +575,44 @@ int main(int ac, char *av[])
         ft_lstadd_back(&a, new);
     }
     int size = ft_lstsize(a);
-    
+    int median = get_median(a);
     int j = -1;
         while(++j < size - 3)
-            pb(&a, &b);
+        {
+            // if(a->data > a->next->data)
+                // sa(&a);
+            // else
+            // {
+                pb(&a, &b);
+                if(ft_lstsize(b) >= 2)
+                {
+                    if(b->data < median)
+                        rb(&b);
+                }    
+            // }
+            
+        }
     sort_three(&a);
-    // display_a(a);
-    // display_b(b);   
-    t_stack *tmp = b;
-    t_node node;
-    i= 0;
-    while(tmp)
-    {
-        node = choose_best_move_2(a, b);
-        get_operation(&a, &b, node);
-        // display_b(b);
-
-        // i++;
-        // printf("val_b :%d, val_a :%d\n", node.val_b, node.val_a);
-        pa(&a, &b);
-        // display_a(a);
-        // display_b(b);
-        // printf("tmp->data : %d\n",tmp->data);
-        tmp = tmp->next;
-                
-    }
-
-    t_stack *tmp1 = b;
-    t_node node1;
-    i= 0;
-    while(tmp1)
-    {
-        node1 = choose_best_move_2(a, b);
-        get_operation(&a, &b, node1);
-        // display_b(b);
-
-        // printf("val_b :%d, val_a :%d\n", node1.val_b, node1.val_a);
-        pa(&a, &b);
-        // display_a(a);
-        // display_b(b);
-        // printf("tmp1->data : %d\n",tmp1->data);
-        tmp1 = tmp1->next;
-                
-    }
-
+    final_case(&a, &b);
     int min_a = min_stack_a(a);
     int index = get_index_of_node(a, min_a);
-    if(index > size - index)
+    if(index == size - index)
+    {
+        while(index--)
+            ra(&a);
+    }
+    else if(index > size - index)
     {
         int c = size - index;
         while(c--)
-            rra(&a);
-                
+            rra(&a);      
     }
     else
-    while(index--)
+    {
+        while(index--)
         ra(&a);
-
-    display_a(a);
-    // display_b(b);   
+    }
+    // display_a(a);
 
     return (0);
 }
-

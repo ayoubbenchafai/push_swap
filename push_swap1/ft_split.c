@@ -6,13 +6,14 @@
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 11:57:11 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/02 21:07:19 by aben-cha         ###   ########.fr       */
+/*   Updated: 2024/02/12 00:07:53 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdio.h>
 #include <string.h>
+
 // int check_min_max(int n)
 // {
 //     if(n > INT_MAX || n < INT_MIN)
@@ -199,28 +200,3 @@ char	**ft_split(char const *s, char c)
 	ptr = ft_allocate_words(s, c, size, j);
     return (ptr);
 }
-
-
-// int main(int ac, char **av)
-// {
-//     char **res ;
-//     int i = 0;
-//     int j = 0;
-//     int n;
-//     while(++i < ac)
-//     {
-//         res = ft_split(av[i], ' ');
-//         while(res[j])
-//         {
-//             n = atoi(res[j]);
-//             printf("%d\n", n);
-//             j++;
-//         }
-//         i++;
-//     }
-//     while(i--)
-//         free(res[i]);
-//     free(res);
-
-//     return (0);
-// }
