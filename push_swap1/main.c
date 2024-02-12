@@ -6,7 +6,7 @@
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 22:01:36 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/12 16:05:11 by aben-cha         ###   ########.fr       */
+/*   Updated: 2024/02/12 19:06:42 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_node
     int move_b;
     int operation;
 }              t_node;
+
 void display_a(t_stack *a)
 {
     printf("stack a:\n");
@@ -37,6 +38,7 @@ void display_a(t_stack *a)
         printf("\n");
 
 }
+
 void display_b(t_stack *b)
 {
     printf("stack b:\n");
@@ -62,6 +64,7 @@ int min_stack_a(t_stack *a)
     }
     return (min);
 }
+
 int get_max(t_stack *a, int val)
 {
     int res;
@@ -85,6 +88,7 @@ int get_max(t_stack *a, int val)
     ft_lstclear(&tmp);
     return (res);
 }
+
 int get_index_of_node(t_stack *s, int val)
 {
     int i;
@@ -101,6 +105,7 @@ int get_index_of_node(t_stack *s, int val)
     }
     return (-1);
 }
+
 int move_node(t_stack *s, int val)
 {
     int size;
@@ -114,6 +119,7 @@ int move_node(t_stack *s, int val)
         return (1);
     return (0);
 }
+
 int get_cost(t_stack *s, int val)
 {
     int size;
@@ -129,6 +135,7 @@ int get_cost(t_stack *s, int val)
     // puts("ra\n");
     return (index);
 }
+
 int set_operation(int move_a, int move_b)
 {
     if(move_a != move_b)
@@ -179,7 +186,7 @@ void swap(int *a, int *b)
     *a = *b;
     *b = tmp;
 }
-void sa(t_stack **a)
+void sa(t_stack **a, int vlag)
 {
     int size;
 
@@ -187,9 +194,10 @@ void sa(t_stack **a)
     if(size <= 1)
         return ;
     swap(&(*a) ->data, &(*a)->next->data);
-    ft_putstr("sa\n");
+    if(vlag == 1)
+        ft_putstr("sa\n");
 }
-void sb(t_stack **b)
+void sb(t_stack **b, int vlag)
 {
     int size;
 
@@ -197,12 +205,13 @@ void sb(t_stack **b)
     if(size <= 1)
         return ;
     swap(&(*b) ->data, &(*b)->next->data);
-    ft_putstr("sb\n");
+    if(vlag == 1)
+        ft_putstr("sb\n");
 }
 void ss(t_stack **a, t_stack **b)
 {
-    sa(a);
-    sa(b);
+    sa(a, 0);
+    sa(b, 0);
     ft_putstr("ss\n");
 }
 void pb(t_stack **a, t_stack **b)
@@ -231,7 +240,7 @@ void pa(t_stack **a, t_stack **b)
     ft_lstdel_front(b);
     ft_putstr("pa\n");
 }
-void ra(t_stack **a)
+void ra(t_stack **a, int i)
 {
     t_stack *first_elem;
     t_stack *last_elem;
@@ -243,9 +252,10 @@ void ra(t_stack **a)
     (*a) = (*a)->next;
     last_elem->next = first_elem;
     first_elem->next = NULL;
-    ft_putstr("ra\n");
+    if (i == 1)
+        ft_putstr("ra\n");
 }
-void rb(t_stack **b)
+void rb(t_stack **b, int vlag)
 {
     t_stack *first_elem;
     t_stack *last_elem;
@@ -257,15 +267,16 @@ void rb(t_stack **b)
     (*b) = (*b)->next;
     last_elem->next = first_elem;
     first_elem->next = NULL; 
-    ft_putstr("rb\n");
+    if(vlag == 1)
+        ft_putstr("rb\n");
 }
 void rr(t_stack **a, t_stack **b)
 {
-    ra(a);
-    ra(b);
+    ra(a, 0);
+    rb(b, 0);
     ft_putstr("rr\n");
 }
-void rra(t_stack **a)
+void rra(t_stack **a, int vlag)
 {
     t_stack *last;
     t_stack *before_last;
@@ -277,9 +288,10 @@ void rra(t_stack **a)
     last->next = *a;
     *a = last;
     before_last->next = NULL;
-    ft_putstr("rra\n");
+    if(vlag == 1)
+        ft_putstr("rra\n");
 }
-void rrb(t_stack **b)
+void rrb(t_stack **b, int vlag)
 {
     t_stack *last;
     t_stack *before_last;
@@ -291,34 +303,15 @@ void rrb(t_stack **b)
     last->next = *b;
     *b = last;
     before_last->next = NULL;
-    ft_putstr("rrb\n");
+    if(vlag == 1)
+        ft_putstr("rrb\n");
 }
 void rrr(t_stack **a, t_stack **b)
 {
-    rra(a);
-    rrb(b);
+    rra(a, 0);
+    rrb(b, 0);
     ft_putstr("rrr\n");
 }
-
-// t_node choose_best_move(t_stack *a, t_stack *b)
-// {
-//     t_stack *tmp= b;
-//     t_node node = best_move(a, b, tmp->data);
-    
-//     tmp = tmp->next;
-//     while(tmp)
-//     {
-//         t_node node1 = best_move(a, b, tmp->data);
-
-//         if(node.cost_ab > node1.cost_ab)
-//             node =node1;
-//         tmp = tmp->next;
-//     }
-//     return node;
-// }
-
-
-
 
 void opeartion1_a(t_stack **a,t_node node)
 {
@@ -330,13 +323,13 @@ void opeartion1_a(t_stack **a,t_node node)
     if(node.move_a == 0) // ra
     {
         while(index--)
-            ra(a);
+            ra(a,1);
     }
     else if(node.move_a == 1) // rra
     {
         size = size - index;
         while(size--)
-            rra(a);
+            rra(a,1);
     }
     else
         return ;
@@ -352,13 +345,13 @@ void opeartion1_b(t_stack **b,t_node node)
     if(node.move_b == 0) // ra
     {
         while(index--)
-            rb(b);
+            rb(b,1);
     }
     else if(node.move_b == 1) // rra
     {
         size = size - index;
         while(size--)
-            rrb(b);
+            rrb(b,1);
     }
     else
         return ;
@@ -383,7 +376,7 @@ void operation2(t_stack **a, t_stack **b, t_node node)
             while(i_b--)
                 rr(a, b);
             while(c--)
-                ra(a);
+                ra(a,1);
         }
         else if(i_a < i_b)
         {
@@ -391,7 +384,7 @@ void operation2(t_stack **a, t_stack **b, t_node node)
             while(i_a--)
                 rr(a, b);
             while(c--)
-                rb(b);
+                rb(b,1);
         }
     }
     else if(node.operation == 2)
@@ -411,7 +404,7 @@ void operation2(t_stack **a, t_stack **b, t_node node)
             while(i_b--)
                 rrr(a, b);
             while(c--)
-                rra(a);
+                rra(a,1);
         }
         else if(i_a < i_b)
         {
@@ -419,7 +412,7 @@ void operation2(t_stack **a, t_stack **b, t_node node)
             while(i_a--)
                 rrr(a, b);
             while(c--)
-                rrb(b);
+                rrb(b,1);
         }
     }
     else
@@ -447,21 +440,21 @@ void sort_three(t_stack **a)
     t_stack *third = two->next;
         
     if((one->data > two->data) && (one->data < third->data))
-        sa(a);
+        sa(a,1);
     else if((one->data > two->data) && (one->data > third->data) && (two->data > third->data))
     {
-        sa(a);
-        rra(a);
+        sa(a,1);
+        rra(a,1);
     }
     else if((one->data > two->data) && (one->data > third->data) && (two->data < third->data))
-        ra(a);
+        ra(a,1);
     else if ((one->data < two->data) && (one->data < third->data) && (two->data > third->data))
     {
-        sa(a);
-        ra(a);
+        sa(a,1);
+        ra(a,1);
     }
     else if((one->data < two->data) && (one->data > third->data) && (two->data > third->data))
-        rra(a);
+        rra(a,1);
 }
 
 t_node choose_best_move_2(t_stack *a, t_stack *b)
@@ -473,16 +466,6 @@ t_node choose_best_move_2(t_stack *a, t_stack *b)
         t_node node1 = best_move(a, b, tmp->data);
         if(node.cost_ab > node1.cost_ab)
             node =node1;
-        // printf("-----------------------\n");
-        // printf("val_a   : %d\n",node1.val_a);
-        // printf("val_b   : %d\n",node1.val_b);
-        // printf("cost_a  : %d\n",node1.cost_a);
-        // printf("cost_b  : %d\n",node1.cost_b);
-        // printf("cost_ab : %d\n",node1.cost_ab);
-        // printf("move_a  : %d\n",node1.move_a);
-        // printf("move_b  : %d\n",node1.move_b);
-        // printf("operation  : %d\n",node1.operation);
-        // printf("-----------------------\n");
         tmp = tmp->next;
     }
     return node;
@@ -579,40 +562,37 @@ int main(int ac, char *av[])
     int j = -1;
         while(++j < size - 3)
         {
-            // if(a->data > a->next->data)
-                // sa(&a);
-            // else
-            // {
+            
                 pb(&a, &b);
                 if(ft_lstsize(b) >= 2)
                 {
-                    if(b->data < median)
-                        rb(&b);
-                }    
-            // }
-            
+                    if( b->data < median)
+                        rb(&b, 1);
+                }                
         }
     sort_three(&a);
     final_case(&a, &b);
     int min_a = min_stack_a(a);
+    // printf("%d", min_a);
     int index = get_index_of_node(a, min_a);
-    if(index == size - index)
+    // printf("index = %d\n", index);
+    // if(index == size - index)
+    // {
+    //     while(a->data != min_a)
+    //         ra(&a, 1);
+    // }
+    // else 
+    if(index > size - index)
     {
-        while(index--)
-            ra(&a);
-    }
-    else if(index > size - index)
-    {
-        int c = size - index;
-        while(c--)
-            rra(&a);      
+        while(a->data != min_a)
+            rra(&a, 1);      
     }
     else
     {
-        while(index--)
-        ra(&a);
+        while(a->data != min_a)
+        ra(&a, 1);
     }
     // display_a(a);
-
+    
     return (0);
 }
