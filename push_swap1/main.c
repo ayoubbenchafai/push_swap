@@ -6,7 +6,7 @@
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 22:01:36 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/12 19:06:42 by aben-cha         ###   ########.fr       */
+/*   Updated: 2024/02/12 23:27:11 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -473,8 +473,7 @@ t_node choose_best_move_2(t_stack *a, t_stack *b)
 
 void final_case(t_stack **a, t_stack **b)
 {
-    t_stack *tmp = *b;
-    int size = ft_lstsize(tmp);
+    int size = ft_lstsize(*b);
     t_node node;
     int i = -1;
     while(++i < size)
@@ -482,9 +481,6 @@ void final_case(t_stack **a, t_stack **b)
         node =choose_best_move_2(*a, *b);
         get_operation(a, b, node);
         pa(a, b);
-        // printf("tmp ->data   : %d\n",node.val_b);
-
-        // tmp = tmp ->next;
     }
 }
 
@@ -541,21 +537,103 @@ int get_median(t_stack *stack)
             
 }
 
+
+//-----------------------------
+int check_char(char *s)
+{
+    while(*s)
+    {
+        if(*s == '-' || *s == '+')
+            s++;
+        if(!(*s >= '0' && *s <= '9'))
+            return (1);
+        s++;
+    }  
+    return (0);
+
+}
+void free_array(char **av)
+{
+    int i;
+
+    i = 0;
+    while(av[i])
+    {
+        free(av[i]);
+        i++;
+    }
+    free(av);
+}
+void f()
+{
+    system("leaks push_swap");
+}
+int is_double(t_stack *stack, int number)
+{
+    while(stack)
+    {
+        if(stack->data == number)
+            return (1);
+        stack = stack->next;
+    }
+    return (0);
+}
+static int ft_parsing(char *av, char c, t_stack **stack)
+{
+    int len_string;
+    int n;
+    char **res = NULL;
+    t_stack *new;
+    len_string = nbr_strings(av, c);
+    if (len_string > 1)
+    {
+        res = ft_split(av, c);
+        int i = -1;
+        while(++i < len_string)
+        {
+            if(check_char(res[i]))
+                return (ft_putstr("Error\n"), free_array(res), ft_lstclear(stack),free(new), 1);
+            n = ft_atoi(res[i]);
+            new = ft_lstnew(n);
+            if(!new)
+                return (1);
+            if(is_double(*stack, n))
+                return (ft_putstr("Error\n"), free_array(res), ft_lstclear(stack),free(new), 1); 
+            ft_lstadd_back(stack, new);
+        }
+        free_array(res);
+    }
+    else
+    {
+        res = ft_split(av, c);
+        if(check_char(res[0]))
+            return (ft_putstr("Error\n"), free_array(res), ft_lstclear(stack), 1);
+        n = ft_atoi(res[0]);
+        new = ft_lstnew(n);
+        if(!new)
+                return (1);
+        if(is_double(*stack, n))
+            return (ft_putstr("Error\n"), free_array(res), ft_lstclear(stack), free(new), 1);
+        ft_lstadd_back(stack, new);
+        free_array(res);
+    }
+    return (0);
+}
+//-------------------------
 int main(int ac, char *av[])
 {
     t_stack *a;
     t_stack *b;
     int i = 0;
-    
+    atexit(f);
     a = NULL;
     b = NULL;
     if(ac == 1 || !strcmp(av[1], " "))
         return (0);
     while(++i < ac)
     {
-        t_stack *new = ft_lstnew(ft_atoi(av[i]));
-        // ft_parsing(av[i], ' ');
-        ft_lstadd_back(&a, new);
+        if(ft_parsing(av[i], ' ', &a))
+            return (1); 
     }
     int size = ft_lstsize(a);
     int median = get_median(a);
@@ -566,22 +644,20 @@ int main(int ac, char *av[])
                 pb(&a, &b);
                 if(ft_lstsize(b) >= 2)
                 {
-                    if( b->data < median)
+                    if(b->data < median)
                         rb(&b, 1);
                 }                
         }
     sort_three(&a);
     final_case(&a, &b);
     int min_a = min_stack_a(a);
-    // printf("%d", min_a);
     int index = get_index_of_node(a, min_a);
-    // printf("index = %d\n", index);
     // if(index == size - index)
     // {
     //     while(a->data != min_a)
     //         ra(&a, 1);
     // }
-    // else 
+    // else
     if(index > size - index)
     {
         while(a->data != min_a)
@@ -592,7 +668,6 @@ int main(int ac, char *av[])
         while(a->data != min_a)
         ra(&a, 1);
     }
-    // display_a(a);
-    
+    ft_lstclear(&a);
     return (0);
 }

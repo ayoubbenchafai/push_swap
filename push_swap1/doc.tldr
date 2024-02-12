@@ -66,9 +66,9 @@
 		{
 			"id": "pointer:pointer",
 			"typeName": "pointer",
-			"x": 12.11487758581842,
-			"y": 262.661901528551,
-			"lastActivityTimestamp": 1707760835379,
+			"x": 281.9970988562149,
+			"y": 835.8089565866305,
+			"lastActivityTimestamp": 1707766125901,
 			"meta": {}
 		},
 		{
@@ -116,8 +116,8 @@
 			"screenBounds": {
 				"x": 0,
 				"y": 0,
-				"w": 749.3055419921875,
-				"h": 734.0277709960938
+				"w": 756.25,
+				"h": 886.111083984375
 			},
 			"insets": [
 				false,
@@ -135,7 +135,7 @@
 			"isFocused": true,
 			"devicePixelRatio": 2.880000114440918,
 			"isCoarsePointer": false,
-			"isHoveringCanvas": true,
+			"isHoveringCanvas": false,
 			"openMenus": [],
 			"isChangingStyle": false,
 			"isReadonly": false,
