@@ -6,7 +6,7 @@
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 22:01:36 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/12 23:27:11 by aben-cha         ###   ########.fr       */
+/*   Updated: 2024/02/13 13:17:50 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -625,7 +625,7 @@ int main(int ac, char *av[])
     t_stack *a;
     t_stack *b;
     int i = 0;
-    atexit(f);
+    // atexit(f);
     a = NULL;
     b = NULL;
     if(ac == 1 || !strcmp(av[1], " "))
@@ -635,6 +635,8 @@ int main(int ac, char *av[])
         if(ft_parsing(av[i], ' ', &a))
             return (1); 
     }
+    // display_a(a);
+    // exit(1);
     int size = ft_lstsize(a);
     int median = get_median(a);
     int j = -1;

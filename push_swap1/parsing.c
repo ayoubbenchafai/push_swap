@@ -6,7 +6,7 @@
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 00:25:19 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/12 23:50:50 by aben-cha         ###   ########.fr       */
+/*   Updated: 2024/02/13 13:07:30 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,17 +127,29 @@ static int ft_parsing(char *av, char c, t_stack **stack)
 //-----------------------
 // INT_MAX : 2147483647
 // INT_MIN : -2147483648
+int  check_min_max(long result, int sign)
+{
+    if(result > INT_MAX && result != 2147483648)
+    {
+        puts("Error\n");
+        return(1);
+    }
+    if(result == 2147483648 && sign == 1)
+    {
+        puts("Error\n");
+        return(1);
+    }    
+    return (0);
+}
 int	ft_atoi(const char *str)
 {
-	int				i;
-	int				sign;
-	unsigned long	result;
+	int     i;
+	int     sign;
+	long    result;
 
 	i = 0;
 	sign = 1;
 	result = 0;
-	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
-		i++;
 	if (str[i] == '-' || str[i] == '+')
 	{
 		if (str[i] == '-')
@@ -147,33 +159,20 @@ int	ft_atoi(const char *str)
 	while (str[i] >= '0' && str[i] <= '9')
 	{
 		result = (result * 10) + str[i] - '0';
-		// if ((result >= 9223372036854775807) && (sign == 1))
-		// 	return (-1);
-		// if ((result > 9223372036854775807) && (sign == -1))
-		// 	return (0);
 		i++;
 	}
-        // printf("result      : %lu\n",result);
-        // printf("result sign : %d\n",(sign) * (int)result);
-
-    if(result > INT_MAX && result != 2147483648)
-    {
-        puts("Error\n");
-        exit(1);
-    }
+    if(check_min_max(result, sign))
+        exit (-1);
 	return (sign * (int)result);
 }
-int check_min_max(int n)
-{
-    if(n > INT_MAX || n < INT_MIN)
-        return(0);
-    return (1);
-}
+
 int main(int ac, char *av[])
 {
-    // printf("%d\n",ft_atoi("2147483649"));
-    // printf("%d\n",ft_atoi("2147483648"));
-    // printf("%d\n",ft_atoi("-2147483648"));
-    printf("%d\n",ft_atoi("2147483647"));
+    char *res[10] = {"1199576152", "1984514596", "2076464756", "-56348301", "-2147483648" ,"-829173723", "-2147483649" ,"1558407338" ,"-496481897","-1578373440"};
+    // printf("%d\n",ft_atoi("-2147483649"));
+    // printf("case 1 : %d\n",ft_atoi("-2147483648"));
+    int i = -1;
+    while(++i < 10)
+        printf("res %d, %d\n", i, ft_atoi(res[i]));
     return (0);
 }

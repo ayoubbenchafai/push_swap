@@ -1,7 +1,5 @@
 {
     "files.associations": {
-        "push_swap.h": "c",
-        "cstdlib": "c",
-        "random": "c"
+        "__locale": "c"
     }
 }
