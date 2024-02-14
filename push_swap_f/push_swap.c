@@ -6,7 +6,7 @@
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 22:01:36 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/14 18:31:33 by aben-cha         ###   ########.fr       */
+/*   Updated: 2024/02/14 18:33:58 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ int main(int ac, char *av[])
     median = get_median(a);
     sort_data(&a, &b, size, median);
     get_stack_a_sorted(&a, size);
-    // display_a(a);
     ft_lstclear(&a);
     ft_lstclear(&b);
     return (0);
