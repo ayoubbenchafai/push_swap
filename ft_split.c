@@ -6,107 +6,11 @@
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 11:57:11 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/02 21:07:19 by aben-cha         ###   ########.fr       */
+/*   Updated: 2024/02/13 15:29:28 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
-#include <string.h>
-// int check_min_max(int n)
-// {
-//     if(n > INT_MAX || n < INT_MIN)
-//         return(0);
-//     return (1);
-// }
-// int	ft_atoi(const char *str)
-// {
-// 	int				i;
-// 	int				sign;
-// 	long             result;
-
-// 	i = 0;
-// 	sign = 1;
-// 	result = 0;
-// 	if (str[i] == '-' || str[i] == '+')
-// 	{
-// 		if (str[i] == '-')
-// 			sign *= -1;
-// 		i++;
-// 	}
-// 	while (str[i] >= '0' && str[i] <= '9')
-// 	{
-// 		result = (result * 10) + str[i] - '0';
-// 		i++;
-// 	}
-//     if(!check_min_max(result))
-//         return (puts("Error\n"), -1);
-
-// 	return (sign * (int)result);
-// }
-
-// int main()
-// {
-//     printf("%d\n",atoi("-2147483649"));
-//     printf("test\n");
-
-//     printf("test : %d\n",ft_atoi("-2147483649"));
-//     return (0);
-// }
-int	ft_atoi(const char *str)
-{
-	int     i;
-	int     sign;
-	int     result;
-
-	i = 0;
-	sign = 1;
-	result = 0;
-	// while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
-	// 	i++;
-	if (str[i] == '-' || str[i] == '+')
-	{
-		if (str[i] == '-')
-			sign *= -1;
-		i++;
-	}
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		result = (result * 10) + str[i] - '0';
-		i++;
-	}
-	return (sign * result);
-}
-size_t	ft_strlen(const char *s)
-{
-	size_t	i;
-
-	i = 0;
-	while (*s)
-	{
-		s++;
-		i++;
-	}
-	return (i);
-}
-
-char	*ft_strdup(const char *s)
-{
-	size_t	i;
-	char	*tab;
-
-	i = 0;
-	tab = malloc(sizeof(char) * (ft_strlen(s) + 1));
-	if (!tab)
-		return (NULL);
-	while (s[i])
-	{
-		tab[i] = s[i];
-		i++;
-	}
-	tab[i] = '\0';
-	return (tab);
-}
 
 int	nbr_strings(const char *s, char c)
 {
@@ -199,28 +103,3 @@ char	**ft_split(char const *s, char c)
 	ptr = ft_allocate_words(s, c, size, j);
     return (ptr);
 }
-
-
-// int main(int ac, char **av)
-// {
-//     char **res ;
-//     int i = 0;
-//     int j = 0;
-//     int n;
-//     while(++i < ac)
-//     {
-//         res = ft_split(av[i], ' ');
-//         while(res[j])
-//         {
-//             n = atoi(res[j]);
-//             printf("%d\n", n);
-//             j++;
-//         }
-//         i++;
-//     }
-//     while(i--)
-//         free(res[i]);
-//     free(res);
-
-//     return (0);
-// }
