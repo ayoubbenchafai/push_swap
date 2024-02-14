@@ -4,7 +4,8 @@ CFLAGS = -Wall -Wextra -Werror
 
 SRC = push_swap.c ft_split.c parsing1_utils.c  functions_utils1.c \
 	functions_utils2.c functions_utils3.c functions_utils4.c \
-	functions_utils5.c functions_utils6.c functions_utils7.c\
+	functions_utils5.c functions_utils6.c functions_utils7.c \
+	functions_utils8.c functions_utils9.c functions_utils10.c
 
 OBJ = $(SRC:.c=.o)
 
