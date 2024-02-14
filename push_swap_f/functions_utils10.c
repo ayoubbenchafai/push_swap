@@ -6,12 +6,25 @@
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:49:07 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/14 16:50:31 by aben-cha         ###   ########.fr       */
+/*   Updated: 2024/02/14 18:28:09 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+int max_stack_a(t_stack *a)
+{
+    if(!(a))
+        return (-1);
+    int max = a->data;
+    while(a)
+    {
+        if(max < a->data)
+            max = a->data;
+        a = a -> next;
+    }
+    return (max);
+}
 t_best_move     set_best_move(t_stack *a, t_stack *b, int val_b)
 {
     t_best_move node;
@@ -33,7 +46,6 @@ t_best_move     set_best_move(t_stack *a, t_stack *b, int val_b)
     node.cost_ab = set_cost_ab(node.move_a, node.move_b, node.cost_a, node.cost_b);
     return (node);
 }
-
 t_best_move     get_best_move(t_stack *a, t_stack *b)
 {
     t_stack *tmp;
@@ -61,5 +73,30 @@ void            final_case(t_stack **a, t_stack **b)
         node =get_best_move(*a, *b);
         get_operation(a, b, node);
         pa(a, b);
+    }
+}
+void get_stack_a_sorted(t_stack **a, int size)
+{
+    int min_a; 
+    int index; 
+    
+    if(!(*a))
+        return ;
+    min_a = min_stack_a(*a);
+    index = get_index_of_node(*a, min_a);
+    if(index == size - index)
+    {
+        while((*a)->data != min_a)
+            ra(a, 1);
+    }
+    else if(index > size - index)
+    {
+        while((*a)->data != min_a)
+            rra(a, 1);      
+    }
+    else
+    {
+        while((*a)->data != min_a)
+        ra(a, 1);
     }
 }

@@ -6,7 +6,7 @@
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 21:49:47 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/14 16:50:42 by aben-cha         ###   ########.fr       */
+/*   Updated: 2024/02/14 18:28:36 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int get_max(t_stack *a, int val);
 int get_index_of_node(t_stack *s, int val);
 int get_move(t_stack *s, int val);
 int get_cost(t_stack *s, int val);
-// had chi mzl 
+
 //fn8------------------------------
 int     set_operation(int move_a, int move_b);
 void    get_operation(t_stack **a, t_stack **b, t_best_move node);
@@ -106,8 +106,10 @@ void    opeartion1_b(t_stack **b, t_best_move node);
 int     set_cost_ab(int move_a, int move_b, int cost_a, int cost_b);
 
 //f10--------------------------------------------------
+int max_stack_a(t_stack *a);
 t_best_move     set_best_move(t_stack *a, t_stack *b, int val_b);
 t_best_move     get_best_move(t_stack *a, t_stack *b);
 void            final_case(t_stack **a, t_stack **b);
+void get_stack_a_sorted(t_stack **a, int size);
 
 #endif

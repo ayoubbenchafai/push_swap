@@ -6,7 +6,7 @@
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:24:10 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/14 16:43:31 by aben-cha         ###   ########.fr       */
+/*   Updated: 2024/02/14 17:38:06 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,6 @@ void operation2_rrr(t_stack **a, t_stack **b, int i_a, int  i_b)
 }
 void operation2(t_stack **a, t_stack **b, t_best_move node)
 {
-    int i_a;
-    int i_b;
     if(node.operation == 1)
         operation2_rr(a, b, node.cost_a, node.cost_b);
     else if(node.operation == 2)
