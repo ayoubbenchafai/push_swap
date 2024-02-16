@@ -6,7 +6,7 @@
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 18:39:43 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/15 18:45:32 by aben-cha         ###   ########.fr       */
+/*   Updated: 2024/02/16 16:25:54 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void pa(t_stack **a, t_stack **b)
     ft_lstadd_front(a, new);
     ft_lstdel_front(b);
 }
+
 void ra(t_stack **a)
 {
     t_stack *first_elem;
@@ -49,6 +50,7 @@ void ra(t_stack **a)
     last_elem->next = first_elem;
     first_elem->next = NULL;
 }
+
 void rb(t_stack **b)
 {
     t_stack *first_elem;
@@ -62,6 +64,7 @@ void rb(t_stack **b)
     last_elem->next = first_elem;
     first_elem->next = NULL; 
 }
+
 void rr(t_stack **a, t_stack **b)
 {
     ra(a);

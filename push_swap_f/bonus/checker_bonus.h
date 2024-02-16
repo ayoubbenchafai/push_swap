@@ -6,7 +6,7 @@
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 23:13:15 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/15 18:53:42 by aben-cha         ###   ########.fr       */
+/*   Updated: 2024/02/16 19:11:11 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,9 @@ char	**ft_split(char const *s, char c);
 //parsing
 int     check_min_max(long result, int sign);
 int     ft_atoi(const char *str);
-void    case_one(char **res, char *av, int count_words, t_stack **stack);
-void    case_two(char **res, char *av, t_stack **stack);
-void    parsing(char *av, t_stack **stack, char c);
+int    case_one(char **res, char *av, int count_words, t_stack **stack);
+int    case_two(char **res, char *av, t_stack **stack);
+int    parsing(char *av, t_stack **stack, char c);
 
 //fn4-----------------------------
 int     is_double(t_stack *stack, int number);

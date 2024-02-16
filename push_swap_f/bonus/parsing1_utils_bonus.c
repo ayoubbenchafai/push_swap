@@ -6,12 +6,12 @@
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:18:20 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/15 18:41:00 by aben-cha         ###   ########.fr       */
+/*   Updated: 2024/02/16 19:13:27 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker_bonus.h"
-
+#include <stdio.h>
 int  check_min_max(long result, int sign)
 {
     if(result > INT_MAX && result != 2147483648)
@@ -26,7 +26,20 @@ int  check_min_max(long result, int sign)
     }    
     return (0);
 }
-
+int spaces(char *s)
+{
+    int i = 0;
+    int len_s = ft_strlen(s);
+    while(s[i])
+    {
+        if(!(s[i] == ' '))
+            return (0);
+        i++;
+    }
+    if(i == len_s)
+        return (1);
+    return (0);   
+}
 int	ft_atoi(const char *str)
 {
 	int     i;
@@ -52,53 +65,55 @@ int	ft_atoi(const char *str)
 	return (sign * (int)result);
 }
 
-void case_one(char **res, char *av, int count_words, t_stack **stack)
+
+int case_one(char **res, char *av, int count_words, t_stack **stack)
 {
     int i;
     int n;
     t_stack *new;
-    
     i = -1;
     res = ft_split(av, ' ');
     if(!res)
-        exit(-1);
+        return (1);
     while(++i < count_words)
     {
 
-        if(check_char(res[i]))
-            free_data(res, stack, new, 0);
+        if(spaces(res[i]) || check_char(res[i]))
+            return (free_data(res, stack, new, 0), 1);
         n = ft_atoi(res[i]);
         new = ft_lstnew(n);
         if(!new)
-            exit(-1);
+            return (1);
         if(is_double(*stack, n))
-            free_data(res, stack, new, 1);
+            return (free_data(res, stack, new, 1), 1);
         ft_lstadd_back(stack, new);
     }
     free_array(res);
+    return (0);
     //free(new);
 }
 
-void case_two(char **res, char *av, t_stack **stack)
+int case_two(char **res, char *av, t_stack **stack)
 {
     int n;
     t_stack *new = NULL;
     res = ft_split(av, ' ');
     if(!res)
-        exit(-1);
-    if(check_char(res[0]))
-        free_data(res, stack, new, 1);
+        return (1);
+    if(spaces(av) || check_char(res[0]))
+        return (free_data(res, stack, new, 1), 1);
     n = ft_atoi(res[0]);
     new = ft_lstnew(n);
     if(!new)
-        exit(-1);
+        return (1);
     if(is_double(*stack, n))
-        free_data(res, stack, new, 1);
+        return(free_data(res, stack, new, 1),1);
     ft_lstadd_back(stack, new);
     free_array(res);
+    return (0);
 }
 
-void parsing(char *av, t_stack **stack, char c)
+int parsing(char *av, t_stack **stack, char c)
 {
     char **res;
     int count_words;
@@ -106,7 +121,14 @@ void parsing(char *av, t_stack **stack, char c)
     res = NULL;
     count_words = nbr_strings(av, c);
     if(count_words > 1)
-        case_one(res, av, count_words, stack);   
+    {
+        if(case_one(res, av, count_words, stack))
+            return (1); 
+    }
     else
-        case_two(res, av, stack);        
+    {
+        if(case_two(res, av, stack))
+            return (1);     
+    }
+    return (0); 
 }

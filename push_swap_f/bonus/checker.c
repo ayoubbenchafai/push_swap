@@ -6,7 +6,7 @@
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 22:01:36 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/16 13:27:00 by aben-cha         ###   ########.fr       */
+/*   Updated: 2024/02/16 19:16:02 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,11 +130,14 @@ int main(int ac, char *av[])
     i = 0;
     a = NULL;
     b = NULL;
-    if(ac == 1 || !(strcmp(av[1], "")))
+    if(ac == 1)
         return (0); 
     while(++i < ac)
-        parsing(av[i], &a, ' ');
-    
+    {
+        if(parsing(av[i], &a, ' '))
+            return (1);
+        
+    }
     i = -1;
     while (1)
     {
