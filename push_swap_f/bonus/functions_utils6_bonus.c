@@ -6,7 +6,7 @@
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 18:44:57 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/15 18:45:47 by aben-cha         ###   ########.fr       */
+/*   Updated: 2024/02/16 13:00:15 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void rrb(t_stack **b)
     t_stack *last;
     t_stack *before_last;
     
-    if(!(*b))
+    if(!(*b) || ft_lstsize(*b) == 1) //zedt size dial b
         return ;
     last = ft_lstlast(*b);
     before_last = ft_lst_before_last(*b);
@@ -42,7 +42,6 @@ void rrr(t_stack **a, t_stack **b)
 {
     rra(a);
     rrb(b);
-    ft_putstr("rrr\n");
 }
 void bubble_sort(int *t, int n) 
 {

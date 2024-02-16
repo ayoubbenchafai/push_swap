@@ -6,7 +6,7 @@
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 22:01:36 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/16 12:46:53 by aben-cha         ###   ########.fr       */
+/*   Updated: 2024/02/16 13:27:00 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,13 +96,13 @@ int	ft_check(char *s, char c)
 	return (0);
 }
 
-static int is_sorted(t_stack *a)
+int is_sorted(t_stack *a)
 {
     if(!a)
         return (1);
     while(a->next)
     {
-        if(a->data > a->next->data)
+        if((a->data) > (a->next->data))
             return (0);
         a = a->next;
     }
@@ -120,36 +120,23 @@ void display_b(t_stack *b)
         printf("\n");
 }
 
-// int check_empty_string(char *s)
-// {
-//     int i = 0;
-//     while(s[i])
-//     {
-//         if(s[i] == ' ' && !(s[i] >= '0' && s[i] <= '9') && !())
-//             return (1);
-//         i++;
-//     }
-//     return (0);
-// }
-
 int main(int ac, char *av[])
 {
     t_stack *a;
     t_stack *b;
     char *s;
     int i;
-    
+
     i = 0;
     a = NULL;
     b = NULL;
-    // printf("%d\n", check_empty_string("       "));
     if(ac == 1 || !(strcmp(av[1], "")))
         return (0); 
     while(++i < ac)
         parsing(av[i], &a, ' ');
     
     i = -1;
-    while(1)
+    while (1)
     {
         s = get_next_line(0);
         if(!s)
