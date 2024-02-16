@@ -6,7 +6,7 @@
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 22:01:36 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/15 22:59:06 by aben-cha         ###   ########.fr       */
+/*   Updated: 2024/02/16 12:46:53 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,33 +25,63 @@ void display_a(t_stack *a)
 
 }
 
-void instructions(t_stack **a,t_stack **b, char *s)
+int instructions(t_stack **a,t_stack **b, char *s)
 {
     if(!s || !(*a))
-        return ;
-        
-    if(!strcmp(s, "sa\n"))
+        return 1;  
+    if(!strcmp(s, "sa\n")){
         sa(a);
-    else if(!strcmp(s, "sb\n"))
+        display_a(*a);
+    }
+    else if(!strcmp(s, "sb\n")){
         sb(b);
-    else if(!strcmp(s, "ss\n"))
+        display_a(*a);
+    }
+    else if(!strcmp(s, "ss\n")){
         ss(a,b);
-    else if(!strcmp(s, "pb\n"))
+        display_a(*a);
+    }
+    else if(!strcmp(s, "pb\n")){
         pb(a,b);
-    else if(!strcmp(s, "pa\n"))
+        display_a(*a);
+    }
+    else if(!strcmp(s, "pa\n")){
         pa(a,b);
-    else if(!strcmp(s, "ra\n"))
+        display_a(*a);
+    }
+    else if(!strcmp(s, "ra\n")){
         ra(a);
-    else if(!strcmp(s, "rb\n"))
+        display_a(*a);
+    }
+    else if(!strcmp(s, "rb\n")){
         rb(a);
-    else if(!strcmp(s, "rr\n"))
+        display_a(*a);
+    }
+    else if(!strcmp(s, "rr\n")){
         rr(a,b);
+        display_a(*a);
+    }
     else if(!strcmp(s, "rra\n"))
+    {
         rra(a);
+        display_a(*a);
+    }
     else if(!strcmp(s, "rrb\n"))
+    {
         rrb(a);
+        display_a(*a);
+    }
     else if(!strcmp(s, "rrr\n"))
+    {
         rrr(a,b);
+        display_a(*a);
+    }
+    else
+    {
+        ft_putstr("Error\n");
+        return 1;
+    }
+    return (0);
 }
 int	ft_check(char *s, char c)
 {
@@ -90,72 +120,49 @@ void display_b(t_stack *b)
         printf("\n");
 }
 
-// static void sort_data(t_stack **a, t_stack **b, int size, int  median)
+// int check_empty_string(char *s)
 // {
-//     int i;
-    
-//     if(!(*a))
-//         return ;
-//     if(size == 2)
-//         sort_two(a);
-//     else if(size == 3)
-//         sort_three(a);
-//     else
+//     int i = 0;
+//     while(s[i])
 //     {
-//         i = -1;
-//         while(++i < size - 3)
-//         {
-//             pb(a, b);
-//             if(ft_lstsize(*b) >= 2)
-//             {
-//                     if((*b)->data < median)
-//                         rb(b);
-//             } 
-//         }
-//         sort_three(a);
-//         final_case(a, b);
+//         if(s[i] == ' ' && !(s[i] >= '0' && s[i] <= '9') && !())
+//             return (1);
+//         i++;
 //     }
+//     return (0);
 // }
 
-// rra
-// pb
-// sa
-// rra
-// pa
 int main(int ac, char *av[])
 {
     t_stack *a;
     t_stack *b;
+    char *s;
     int i;
-    // int size;
-    // int median;
     
     i = 0;
     a = NULL;
     b = NULL;
-    if(ac == 1)
-        return (0); while(++i < ac)
+    // printf("%d\n", check_empty_string("       "));
+    if(ac == 1 || !(strcmp(av[1], "")))
+        return (0); 
+    while(++i < ac)
         parsing(av[i], &a, ' ');
     
     i = -1;
     while(1)
     {
-        char *s = get_next_line(0);
+        s = get_next_line(0);
         if(!s)
-            return (free(s), 1);
-        instructions(&a, &b, s);
-        if(s == NULL)
-            return 1;
+        {
+            if(is_sorted(a) && !b)
+                return (free(s), ft_putstr("OK\n"), 0);
+            else
+                return (free(s), ft_putstr("KO\n"), 0);
+        }
+        if(instructions(&a, &b, s))
+                return (free(s), 1);
         free(s);
     }
-    if(is_sorted(a))
-        return (ft_putstr("OK\n"),0);
-    // display_a(a);
-    // if(is_sorted(a))
-    //     return (ft_putstr("OK\n"),0);
-    // else
-    //     return (ft_putstr("KO\n"),0); 
     ft_lstclear(&a);
-
     return (0);
 }
