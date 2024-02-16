@@ -6,7 +6,7 @@
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 18:34:08 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/15 18:45:07 by aben-cha         ###   ########.fr       */
+/*   Updated: 2024/02/16 23:33:24 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,13 @@ void swap(int *a, int *b)
 }
 void sa(t_stack **a)
 {
-    int size;
-
-    size = ft_lstsize(*a);
-    if(size <= 1)
+    if(!(*a) || !(*a)->next)
         return ;
     swap(&(*a) ->data, &(*a)->next->data);
 }
 void sb(t_stack **b)
 {
-    int size;
-
-    size = ft_lstsize(*b);
-    if(size <= 1)
+    if(!(*b) || !(*b)->next)
         return ;
     swap(&(*b) ->data, &(*b)->next->data);
 }

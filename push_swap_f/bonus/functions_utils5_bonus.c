@@ -6,7 +6,7 @@
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 18:39:43 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/16 16:25:54 by aben-cha         ###   ########.fr       */
+/*   Updated: 2024/02/16 23:40:00 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void ra(t_stack **a)
     t_stack *first_elem;
     t_stack *last_elem;
     
-    if(!(*a))
+    if(!(*a) || !(*a)->next)
         return ;
     first_elem = *a;
     last_elem = ft_lstlast(*a);
@@ -56,7 +56,7 @@ void rb(t_stack **b)
     t_stack *first_elem;
     t_stack *last_elem;
     
-    if(!(*b))
+    if(!(*b) || !(*b)->next)
         return ;
     first_elem = *b;
     last_elem = ft_lstlast(*b);

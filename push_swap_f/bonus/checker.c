@@ -6,7 +6,7 @@
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 22:01:36 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/16 20:16:16 by aben-cha         ###   ########.fr       */
+/*   Updated: 2024/02/16 23:29:27 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	ft_check(char *s, char c)
 
 int is_sorted(t_stack *a)
 {
-    if(!a)
+    if(!a || !a->next)
         return (1);
     while(a->next)
     {
@@ -85,17 +85,7 @@ int is_sorted(t_stack *a)
     }
     return 1;
 }
-void display_b(t_stack *b)
-{
-    printf("stack b:\n");
 
-    while(b)
-    {
-        printf("%d ", b->data);
-        b = b->next;
-    }
-        printf("\n");
-}
 void f()
 {
     system("leaks checker");
@@ -106,7 +96,7 @@ int main(int ac, char *av[])
     t_stack *b;
     char *s;
     int i;
-    atexit(f);
+    // atexit(f);
     i = 0;
     a = NULL;
     b = NULL;

@@ -6,7 +6,7 @@
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:18:20 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/16 19:13:27 by aben-cha         ###   ########.fr       */
+/*   Updated: 2024/02/16 23:29:05 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	ft_atoi(const char *str)
 		i++;
 	}
     if(check_min_max(result, sign))
-        exit (-1);
+        return (1);
 	return (sign * (int)result);
 }
 
@@ -73,8 +73,11 @@ int case_one(char **res, char *av, int count_words, t_stack **stack)
     t_stack *new;
     i = -1;
     res = ft_split(av, ' ');
+    char **p = res;//a->next
+    res = NULL;
+    system("leaks checker");
     if(!res)
-        return (1);
+        return (free_array(p), 1);
     while(++i < count_words)
     {
 
@@ -89,8 +92,8 @@ int case_one(char **res, char *av, int count_words, t_stack **stack)
         ft_lstadd_back(stack, new);
     }
     free_array(res);
+
     return (0);
-    //free(new);
 }
 
 int case_two(char **res, char *av, t_stack **stack)
@@ -130,5 +133,6 @@ int parsing(char *av, t_stack **stack, char c)
         if(case_two(res, av, stack))
             return (1);     
     }
+
     return (0); 
 }
