@@ -6,7 +6,7 @@
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 22:01:36 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/16 23:29:27 by aben-cha         ###   ########.fr       */
+/*   Updated: 2024/02/17 19:18:35 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,41 +25,35 @@ void display_a(t_stack *a)
 
 }
 
-int instructions(t_stack **a,t_stack **b, char *s)
-{
-    if(!s || !(*a))
-        return 1;  
+int apply_instructions(t_stack **a,t_stack **b, char *s)
+{ 
     if(!strcmp(s, "sa\n"))
-        sa(a);
+        return (sa(a), 0);
     else if(!strcmp(s, "sb\n"))
-        sb(b);
+        return (sb(b), 0);
     else if(!strcmp(s, "ss\n"))
-    {
-        ss(a,b);
-        display_a(*a);
-        display_a(*b);
-    }
+        return (ss(a,b),0);
     else if(!strcmp(s, "pb\n"))
-        pb(a,b);
+        return (pb(a,b), 0);
     else if(!strcmp(s, "pa\n"))
-        pa(a,b);
+        return (pa(a,b), 0);
     else if(!strcmp(s, "ra\n"))
-        ra(a);
+        return (ra(a), 0);
     else if(!strcmp(s, "rb\n"))
-        rb(a);
+        return(rb(a), 0);
     else if(!strcmp(s, "rr\n"))
-        rr(a,b);
+        return(rr(a,b), 0);
     else if(!strcmp(s, "rra\n"))
-        rra(a);
+        return (rra(a), 0);
     else if(!strcmp(s, "rrb\n"))
-        rrb(a);
+        return (rrb(a), 0);
     else if(!strcmp(s, "rrr\n"))
-        rrr(a,b);
+        return (rrr(a,b), 0);
     else
-        return (ft_putstr("Error\n") ,1);     
-    
-    return (0);
+        return (ft_putstr("Error\n") ,1);    
 }
+
+//ft_read
 int	ft_check(char *s, char c)
 {
 	if (!s)
@@ -85,18 +79,12 @@ int is_sorted(t_stack *a)
     }
     return 1;
 }
-
-void f()
-{
-    system("leaks checker");
-}
 int main(int ac, char *av[])
 {
     t_stack *a;
     t_stack *b;
     char *s;
     int i;
-    // atexit(f);
     i = 0;
     a = NULL;
     b = NULL;
@@ -113,11 +101,11 @@ int main(int ac, char *av[])
         if(!s)
         {
             if(is_sorted(a) && !b)
-                return ( ft_lstclear(&a),ft_putstr("OK\n"), 0);
+                return (ft_lstclear(&a),ft_putstr("OK\n"), 0);
             else
-                return (ft_lstclear(&a),ft_lstclear(&b), ft_putstr("KO\n"), 0);
+                return (ft_lstclear(&a),ft_lstclear(&b), ft_putstr("KO\n"), 1);
         }
-        if(instructions(&a, &b, s))
+        if(apply_instructions(&a, &b, s))
                 return (free(s),ft_lstclear(&b), ft_lstclear(&a), 1);
         free(s);
     }

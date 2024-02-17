@@ -6,7 +6,7 @@
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:18:20 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/16 23:29:05 by aben-cha         ###   ########.fr       */
+/*   Updated: 2024/02/17 19:13:01 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,51 +64,62 @@ int	ft_atoi(const char *str)
         return (1);
 	return (sign * (int)result);
 }
-
+int add_to_stack(t_stack **stack, char *res)
+{
+    int n;
+    t_stack *new;
+    t_stack *p_new;
+    
+    new = NULL;
+    if(check_char(res))
+        return (ft_putstr("Error\n"), 1);
+    n = ft_atoi(res);
+    new = ft_lstnew(n);
+    p_new = new;
+    if(!new)
+        return (free(p_new), 1);
+    if(is_double(*stack, n))
+        return (free(new), ft_putstr("Error\n"), 1);
+    ft_lstadd_back(stack, new);
+    return (0);
+}
 
 int case_one(char **res, char *av, int count_words, t_stack **stack)
 {
     int i;
-    int n;
-    t_stack *new;
+    char **p;
+    
     i = -1;
     res = ft_split(av, ' ');
-    char **p = res;//a->next
-    res = NULL;
-    system("leaks checker");
+    p = res;
     if(!res)
         return (free_array(p), 1);
     while(++i < count_words)
     {
-
-        if(spaces(res[i]) || check_char(res[i]))
-            return (free_data(res, stack, new, 0), 1);
-        n = ft_atoi(res[i]);
-        new = ft_lstnew(n);
-        if(!new)
+        if(add_to_stack(stack, res[i]))
             return (1);
-        if(is_double(*stack, n))
-            return (free_data(res, stack, new, 1), 1);
-        ft_lstadd_back(stack, new);
     }
-    free_array(res);
-
-    return (0);
+    return (free_array(res), 0);
 }
-
 int case_two(char **res, char *av, t_stack **stack)
 {
     int n;
-    t_stack *new = NULL;
+    char **p;
+    t_stack *new; 
+    t_stack *p_new; 
+    
+    new= NULL;
     res = ft_split(av, ' ');
+    p = res;
     if(!res)
-        return (1);
+        return (free_array(p), 1);
     if(spaces(av) || check_char(res[0]))
-        return (free_data(res, stack, new, 1), 1);
+        return (free_data(res, stack, new, 0), 1);
     n = ft_atoi(res[0]);
     new = ft_lstnew(n);
+    p_new = new;
     if(!new)
-        return (1);
+        return (free(p_new), 1);
     if(is_double(*stack, n))
         return(free_data(res, stack, new, 1),1);
     ft_lstadd_back(stack, new);
@@ -131,8 +142,7 @@ int parsing(char *av, t_stack **stack, char c)
     else
     {
         if(case_two(res, av, stack))
-            return (1);     
+            return (1);                 
     }
-
     return (0); 
 }
