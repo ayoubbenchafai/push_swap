@@ -6,12 +6,24 @@
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 11:42:44 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/15 17:42:52 by aben-cha         ###   ########.fr       */
+/*   Updated: 2024/02/17 22:33:05 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker_bonus.h"
 
+int	ft_check(char *s, char c)
+{
+	if (!s)
+		return (1);
+	while (*s)
+	{
+		if (*s == c)
+			return (1);
+		s++;
+	}
+	return (0);
+}
 
 static char	*ft_read(char *s, int fd)
 {

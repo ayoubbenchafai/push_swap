@@ -6,12 +6,11 @@
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:18:20 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/17 19:13:01 by aben-cha         ###   ########.fr       */
+/*   Updated: 2024/02/17 22:56:58 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker_bonus.h"
-#include <stdio.h>
 int  check_min_max(long result, int sign)
 {
     if(result > INT_MAX && result != 2147483648)
@@ -25,44 +24,6 @@ int  check_min_max(long result, int sign)
         return(1);
     }    
     return (0);
-}
-int spaces(char *s)
-{
-    int i = 0;
-    int len_s = ft_strlen(s);
-    while(s[i])
-    {
-        if(!(s[i] == ' '))
-            return (0);
-        i++;
-    }
-    if(i == len_s)
-        return (1);
-    return (0);   
-}
-int	ft_atoi(const char *str)
-{
-	int     i;
-	int     sign;
-	long    result;
-
-	i = 0;
-	sign = 1;
-	result = 0;
-	if (str[i] == '-' || str[i] == '+')
-	{
-		if (str[i] == '-')
-			sign *= -1;
-		i++;
-	}
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		result = (result * 10) + str[i] - '0';
-		i++;
-	}
-    if(check_min_max(result, sign))
-        return (1);
-	return (sign * (int)result);
 }
 int add_to_stack(t_stack **stack, char *res)
 {
@@ -83,7 +44,6 @@ int add_to_stack(t_stack **stack, char *res)
     ft_lstadd_back(stack, new);
     return (0);
 }
-
 int case_one(char **res, char *av, int count_words, t_stack **stack)
 {
     int i;
@@ -126,7 +86,6 @@ int case_two(char **res, char *av, t_stack **stack)
     free_array(res);
     return (0);
 }
-
 int parsing(char *av, t_stack **stack, char c)
 {
     char **res;

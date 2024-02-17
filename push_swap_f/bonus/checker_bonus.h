@@ -6,7 +6,7 @@
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 23:13:15 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/16 19:11:11 by aben-cha         ###   ########.fr       */
+/*   Updated: 2024/02/17 23:31:48 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,14 @@
 #  define BUFFER_SIZE 10
 # endif
 
+//het_nexy_line
 char	*get_next_line(int fd);
+int	    ft_check(char *s, char c);
 char	*ft_join_free(char *s, const char *buf);
-// size_t	ft_strlen(const char *s);
-// char	*ft_strdup(const char *s);
+size_t	ft_strlen(const char *s);
+char	*ft_strdup(const char *s);
 char	*ft_strcpy(char *dst, const char *src);
 char	*ft_strjoin(char *s1, const char *s2);
-int	ft_check(char *s, char c);
 
 
 typedef struct s_stack
@@ -61,8 +62,9 @@ void    ft_lstdel_front(t_stack **lst);
 int     check_char(char *s);
 //fn3--------------------------
 void	ft_putstr(char *s);
-size_t	ft_strlen(const char *s);
-char	*ft_strdup(const char *s);// check s== NULL
+int spaces(char *s);
+// size_t	ft_strlen(const char *s);
+// char	*ft_strdup(const char *s);// check s== NULL
 void    free_array(char **av);
 void    free_data(char **res ,t_stack **stack, t_stack *new, int vlag);
 //split---
@@ -123,4 +125,11 @@ t_best_move     set_best_move(t_stack *a, t_stack *b, int val_b);
 t_best_move     get_best_move(t_stack *a, t_stack *b);
 void            final_case(t_stack **a, t_stack **b);
 void get_stack_a_sorted(t_stack **a, int size);
+
+//f11-------------------
+int	ft_strcmp(char *s1, char *s2);
+int apply_instructions(t_stack **a,t_stack **b, char *s);
+int is_sorted(t_stack *a);
+int read_instructions(t_stack *a, t_stack *b);
+
 #endif
