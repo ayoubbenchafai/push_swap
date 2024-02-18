@@ -92,6 +92,7 @@ int main(int ac, char *av[])
         return (0);
     while(++i < ac)
         parsing(av[i], &a, ' ');
+
     if(is_sorted(a))
         return (0);
     size = ft_lstsize(a);
@@ -99,7 +100,7 @@ int main(int ac, char *av[])
     sort_data(&a, &b, size, median);
     get_stack_a_sorted(&a, size);
     ft_lstclear(&a);
-    ft_lstclear(&b);
+    // ft_lstclear(&b);
     
     return (0);
 }

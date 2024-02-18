@@ -6,11 +6,12 @@
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 22:01:36 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/17 23:48:34 by aben-cha         ###   ########.fr       */
+/*   Updated: 2024/02/18 11:39:07 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker_bonus.h"
+#include "stdio.h"
 
 int main(int ac, char *av[])
 {

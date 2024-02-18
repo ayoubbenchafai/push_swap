@@ -6,7 +6,7 @@
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:49:07 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/14 18:28:09 by aben-cha         ###   ########.fr       */
+/*   Updated: 2024/02/18 12:35:20 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void get_stack_a_sorted(t_stack **a, int size)
         while((*a)->data != min_a)
             ra(a, 1);
     }
-    else if(index > size - index)
+    else  if(index > size - index)
     {
         while((*a)->data != min_a)
             rra(a, 1);      
