@@ -6,7 +6,7 @@
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 11:57:11 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/15 18:43:11 by aben-cha         ###   ########.fr       */
+/*   Updated: 2024/02/18 15:14:34 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,5 +101,5 @@ char	**ft_split(char const *s, char c)
 	size = nbr_strings(s, c);
 	j = 0;
 	ptr = ft_allocate_words(s, c, size, j);
-    return (ptr);
+	return (ptr);
 }

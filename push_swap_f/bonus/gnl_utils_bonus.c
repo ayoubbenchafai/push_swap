@@ -6,12 +6,11 @@
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 11:32:17 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/15 19:01:14 by aben-cha         ###   ########.fr       */
+/*   Updated: 2024/02/18 15:13:03 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker_bonus.h"
-
 
 char	*ft_join_free(char *s, const char *buf)
 {
@@ -73,8 +72,8 @@ char	*ft_strjoin(char *s1, const char *s2)
 	size_t	size;
 	char	*tab;
 
-    if(!s1 && !s2)
-        return (NULL);
+	if (!s1 && !s2)
+		return (NULL);
 	if (!s1)
 		return (ft_strdup(s2));
 	if (!s2)

@@ -6,7 +6,7 @@
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:18:20 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/17 22:56:58 by aben-cha         ###   ########.fr       */
+/*   Updated: 2024/02/18 15:57:57 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@ int  check_min_max(long result, int sign)
 {
     if(result > INT_MAX && result != 2147483648)
     {
-        ft_putstr("Error\n");
+        ft_putstr("Error\n", 2);
         return(1);
     }
     if(result == 2147483648 && sign == 1)
     {
-        ft_putstr("Error\n");
+        ft_putstr("Error\n", 2);
         return(1);
     }    
     return (0);
@@ -33,14 +33,14 @@ int add_to_stack(t_stack **stack, char *res)
     
     new = NULL;
     if(check_char(res))
-        return (ft_putstr("Error\n"), 1);
+        return (ft_putstr("Error\n", 2), 1);
     n = ft_atoi(res);
     new = ft_lstnew(n);
     p_new = new;
     if(!new)
         return (free(p_new), 1);
     if(is_double(*stack, n))
-        return (free(new), ft_putstr("Error\n"), 1);
+        return (free(new), ft_putstr("Error\n", 2), 1);
     ft_lstadd_back(stack, new);
     return (0);
 }
@@ -73,7 +73,7 @@ int case_two(char **res, char *av, t_stack **stack)
     p = res;
     if(!res)
         return (free_array(p), 1);
-    if(spaces(av) || check_char(res[0]))
+    if(check_char(res[0]))
         return (free_data(res, stack, new, 0), 1);
     n = ft_atoi(res[0]);
     new = ft_lstnew(n);

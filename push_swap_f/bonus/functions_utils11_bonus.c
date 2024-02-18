@@ -6,7 +6,7 @@
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 23:29:24 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/18 12:03:37 by aben-cha         ###   ########.fr       */
+/*   Updated: 2024/02/18 15:59:08 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,40 +27,29 @@ int	ft_strcmp(char *s1, char *s2)
 int apply_instructions(t_stack **a,t_stack **b, char *s)
 { 
     if(!ft_strcmp(s, "sa\n"))
-        return (sa(a), 0);
-        
+        return (sa(a), 0);    
     else if(!ft_strcmp(s, "sb\n"))
-        return (sb(b), 0);
-    
+        return (sb(b), 0); 
     else if(!ft_strcmp(s, "ss\n"))
-        return (ss(a,b), 0);
-    
+        return (ss(a,b), 0); 
     else if(!ft_strcmp(s, "pb\n"))
         return (pb(a,b), 0);
-    
     else if(!ft_strcmp(s, "pa\n"))
-        return (pa(a,b), 0);
-    
+        return (pa(a,b), 0);  
     else if(!ft_strcmp(s, "ra\n"))
-        return (ra(a), 0);
-    
+        return (ra(a), 0);  
     else if(!ft_strcmp(s, "rb\n"))
-        return(rb(b), 0);
-    
+        return(rb(b), 0);   
     else if(!ft_strcmp(s, "rr\n"))
-        return(rr(a,b), 0);
-    
+        return(rr(a,b), 0);  
     else if(!ft_strcmp(s, "rra\n"))
-        return (rra(a), 0);
-    
+        return (rra(a), 0);   
     else if(!ft_strcmp(s, "rrb\n"))
-        return (rrb(b), 0);
-    
+        return (rrb(b), 0);  
     else if(!ft_strcmp(s, "rrr\n"))
         return (rrr(a,b), 0);
-    
     else
-        return (ft_putstr("Error\n") ,1);    
+        return (ft_putstr("Error\n", 2) ,1);    
 }
 int is_sorted(t_stack *a)
 {
@@ -85,9 +74,9 @@ int read_instructions(t_stack *a, t_stack *b)
         if(!s)
         {  
             if(is_sorted(a) && !b)
-                return (ft_lstclear(&a),ft_putstr("OK\n"), 0);
+                return (ft_lstclear(&a),ft_putstr("OK\n", 1), 0);
             else
-                return (ft_lstclear(&a),ft_lstclear(&b), ft_putstr("KO\n"), 1);
+                return (ft_lstclear(&a),ft_lstclear(&b), ft_putstr("KO\n", 2), 1);
         }
         if(apply_instructions(&a, &b, s))
                 return (free(s),ft_lstclear(&b), ft_lstclear(&a), 1);

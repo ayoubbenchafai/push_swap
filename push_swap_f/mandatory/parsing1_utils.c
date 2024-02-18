@@ -6,7 +6,7 @@
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:18:20 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/16 19:10:22 by aben-cha         ###   ########.fr       */
+/*   Updated: 2024/02/18 13:47:04 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,20 @@ void case_one(char **res, char *av, int count_words, t_stack **stack)
     free_array(res);
     //free(new);
 }
-
+int spaces(char *s)
+{
+    int i = 0;
+    int len_s = ft_strlen(s);
+    while(s[i])
+    {
+        if(!(s[i] == ' '))
+            return (0);
+        i++;
+    }
+    if(i == len_s)
+        return (1);
+    return (0);   
+}
 void case_two(char **res, char *av, t_stack **stack)
 {
     int n;
@@ -86,7 +99,7 @@ void case_two(char **res, char *av, t_stack **stack)
     res = ft_split(av, ' ');
     if(!res)
         exit(-1);
-    if(check_char(res[0]))
+    if(spaces(av) || check_char(res[0]))
         free_data(res, stack, new, 1);
     n = ft_atoi(res[0]);
     new = ft_lstnew(n);

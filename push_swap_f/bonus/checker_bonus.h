@@ -6,7 +6,7 @@
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 23:13:15 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/17 23:31:48 by aben-cha         ###   ########.fr       */
+/*   Updated: 2024/02/18 15:56:04 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ t_stack *ft_lst_before_last(t_stack *lst);
 void    ft_lstdel_front(t_stack **lst);
 int     check_char(char *s);
 //fn3--------------------------
-void	ft_putstr(char *s);
+void    ft_putstr(char *s, int i);
 int spaces(char *s);
 // size_t	ft_strlen(const char *s);
 // char	*ft_strdup(const char *s);// check s== NULL

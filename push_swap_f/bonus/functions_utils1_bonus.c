@@ -6,7 +6,7 @@
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:21:58 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/15 18:29:43 by aben-cha         ###   ########.fr       */
+/*   Updated: 2024/02/18 15:24:40 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 t_stack	*ft_lstnew(int data)
 {
-    t_stack *new;
+	t_stack	*new;
 
-    new = (t_stack *)malloc(sizeof(t_stack));
-    if(!new)
-        return (NULL);
-    new->data = data;
-    new->next = NULL;
-    return (new);
+	new = (t_stack *)malloc(sizeof(t_stack));
+	if (!new)
+		return (NULL);
+	new->data = data;
+	new->next = NULL;
+	return (new);
 }
 
 void	ft_lstadd_front(t_stack **lst, t_stack *new)
@@ -32,7 +32,7 @@ void	ft_lstadd_front(t_stack **lst, t_stack *new)
 	*lst = new;
 }
 
-int		ft_lstsize(t_stack *lst)
+int	ft_lstsize(t_stack *lst)
 {
 	int		len;
 	t_stack	*ptr;
@@ -45,7 +45,7 @@ int		ft_lstsize(t_stack *lst)
 	{
 		len++;
 		ptr = ptr->next;
-    }
+	}
 	return (len);
 }
 
