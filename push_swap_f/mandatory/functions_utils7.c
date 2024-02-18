@@ -6,7 +6,7 @@
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 22:20:54 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/13 22:22:20 by aben-cha         ###   ########.fr       */
+/*   Updated: 2024/02/19 00:53:31 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,23 @@ int min_stack_a(t_stack *a)
     }
     return (min);
 }
+void free_new(t_stack *new, int data)
+{
+    t_stack * p_new;
+    new = ft_lstnew(data);
+    p_new = new;
+    if(!new)
+    {
+        free(p_new);
+        exit(1);
+    }
+}
 int get_max(t_stack *a, int val)
 {
     int res;
     t_stack *r;
     t_stack *tmp;
+    t_stack *new;
     
     r = a;
     tmp = NULL;
@@ -39,17 +51,25 @@ int get_max(t_stack *a, int val)
     {
         if(a->data > val)
         {
-            t_stack *new = ft_lstnew(a->data);
+            new = ft_lstnew(a->data);
+            if(!new)
+            {
+                ft_lstclear(&tmp);
+                ft_lstclear(&a);
+                exit(1);
+            }
             ft_lstadd_front(&tmp, new);
         }
         a = a -> next;
     }
-    res = min_stack_a(tmp);
-    if(res < val)
+    if (tmp == NULL)
         res = min_stack_a(r);
+    else
+        res = min_stack_a(tmp);
     ft_lstclear(&tmp);
     return (res);
 }
+
 int get_index_of_node(t_stack *s, int val)
 {
     int i;
@@ -62,7 +82,7 @@ int get_index_of_node(t_stack *s, int val)
         if(s->data == val)
             return (i);
         i++;
-        s =s ->next;
+        s = s ->next;
     }
     return (-1);
 }

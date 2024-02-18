@@ -6,7 +6,7 @@
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:23:50 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/15 16:35:45 by aben-cha         ###   ########.fr       */
+/*   Updated: 2024/02/18 19:19:07 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	ft_lstdelone(t_stack *lst)
 		return ;
 	free(lst);
 }
+
 void	ft_lstclear(t_stack **lst)
 {
 	t_stack	*ptr;
@@ -29,7 +30,7 @@ void	ft_lstclear(t_stack **lst)
 	while (ptr)
 	{
 		ptr1 = ptr -> next;
-		ft_lstdelone(ptr);
+		free(ptr);
 		ptr = ptr1;
 	}
 	*lst = NULL;

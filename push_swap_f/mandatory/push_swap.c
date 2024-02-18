@@ -12,6 +12,7 @@
 
 #include "push_swap.h"
 #include <string.h>
+#include <signal.h>
 
 
 void display_a(t_stack *a)
@@ -23,6 +24,11 @@ void display_a(t_stack *a)
         a = a->next;
     }
         printf("\n");
+
+}
+void f(void)
+{
+            system("leaks push_swap");
 
 }
 int is_sorted(t_stack *a)
@@ -76,6 +82,10 @@ static void sort_data(t_stack **a, t_stack **b, int size, int  median)
         final_case(a, b);
     }
 }
+void sig_handle(int sig)
+{
+    (void)sig;
+}
 
 int main(int ac, char *av[])
 {
@@ -85,6 +95,9 @@ int main(int ac, char *av[])
     int size;
     int median;
     
+    // signal(SIGUSR1, sig_handle);
+    // printf("PID : %d\n", getpid());
+    // atexit(f);
     i = 0;
     a = NULL;
     b = NULL;
@@ -92,13 +105,13 @@ int main(int ac, char *av[])
         return (0);
     while(++i < ac)
         parsing(av[i], &a, ' ');
-
     if(is_sorted(a))
         return (0);
     size = ft_lstsize(a);
     median = get_median(a);
     sort_data(&a, &b, size, median);
     get_stack_a_sorted(&a, size);
+    display_a(a);
     ft_lstclear(&a);
     // ft_lstclear(&b);
     

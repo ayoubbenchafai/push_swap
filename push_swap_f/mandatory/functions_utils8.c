@@ -6,7 +6,7 @@
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:24:10 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/18 12:37:24 by aben-cha         ###   ########.fr       */
+/*   Updated: 2024/02/18 16:49:54 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void get_operation(t_stack **a, t_stack **b, t_best_move node)
     if(node.operation == 0)
     {
         opeartion1_a(a, node);
-        opeartion1_b(b, node);  
+        opeartion1_b(b, node);
     }
     else
     {

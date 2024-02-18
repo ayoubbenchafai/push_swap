@@ -6,7 +6,7 @@
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:49:07 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/18 12:35:20 by aben-cha         ###   ########.fr       */
+/*   Updated: 2024/02/18 18:45:29 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ t_best_move     set_best_move(t_stack *a, t_stack *b, int val_b)
     node.val_a = get_max(a, node.val_b);
     node.cost_a = get_cost(a, node.val_a);
     node.cost_b = get_cost(b, node.val_b);
+    
     if(node.cost_a == 0)
         node.move_a = 2;
     else
@@ -67,10 +68,10 @@ void            final_case(t_stack **a, t_stack **b)
     int i ;
     int size; 
     size = ft_lstsize(*b);
-    i= -1;
+    i = -1;
     while(++i < size)
     {
-        node =get_best_move(*a, *b);
+        node = get_best_move(*a, *b);
         get_operation(a, b, node);
         pa(a, b);
     }

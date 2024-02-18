@@ -6,7 +6,7 @@
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:45:29 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/14 16:46:54 by aben-cha         ###   ########.fr       */
+/*   Updated: 2024/02/18 18:34:52 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,12 @@ void opeartion1_a(t_stack **a, t_best_move node)
         return ;
     int size = ft_lstsize(*a);
     int index = get_index_of_node(*a, node.val_a);
-
+    // if (index == -1)
+    // {
+    //     printf("val %d\n", node.val_a);
+    //     display_a(*a);
+    //     pause();
+    // }
     if(node.move_a == 0) // ra
     {
         while(index--)

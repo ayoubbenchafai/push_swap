@@ -6,7 +6,7 @@
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 22:20:54 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/15 18:41:18 by aben-cha         ###   ########.fr       */
+/*   Updated: 2024/02/18 22:43:14 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int get_max(t_stack *a, int val)
     ft_lstclear(&tmp);
     return (res);
 }
+
 int get_index_of_node(t_stack *s, int val)
 {
     int i;
