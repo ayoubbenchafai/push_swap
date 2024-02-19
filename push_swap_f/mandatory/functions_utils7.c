@@ -6,7 +6,7 @@
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 22:20:54 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/19 00:53:31 by aben-cha         ###   ########.fr       */
+/*   Updated: 2024/02/19 20:08:31 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,38 +38,6 @@ void free_new(t_stack *new, int data)
         exit(1);
     }
 }
-int get_max(t_stack *a, int val)
-{
-    int res;
-    t_stack *r;
-    t_stack *tmp;
-    t_stack *new;
-    
-    r = a;
-    tmp = NULL;
-    while(a)
-    {
-        if(a->data > val)
-        {
-            new = ft_lstnew(a->data);
-            if(!new)
-            {
-                ft_lstclear(&tmp);
-                ft_lstclear(&a);
-                exit(1);
-            }
-            ft_lstadd_front(&tmp, new);
-        }
-        a = a -> next;
-    }
-    if (tmp == NULL)
-        res = min_stack_a(r);
-    else
-        res = min_stack_a(tmp);
-    ft_lstclear(&tmp);
-    return (res);
-}
-
 int get_index_of_node(t_stack *s, int val)
 {
     int i;

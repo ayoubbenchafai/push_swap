@@ -6,7 +6,7 @@
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:49:07 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/18 18:45:29 by aben-cha         ###   ########.fr       */
+/*   Updated: 2024/02/19 20:12:10 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,9 @@ t_best_move     set_best_move(t_stack *a, t_stack *b, int val_b)
     t_best_move node;
     
     node.val_b = val_b;
-    node.val_a = get_max(a, node.val_b);
+    node.val_a = find_min_greater_than(a, node.val_b);
     node.cost_a = get_cost(a, node.val_a);
     node.cost_b = get_cost(b, node.val_b);
-    
     if(node.cost_a == 0)
         node.move_a = 2;
     else
@@ -68,10 +67,10 @@ void            final_case(t_stack **a, t_stack **b)
     int i ;
     int size; 
     size = ft_lstsize(*b);
-    i = -1;
+    i= -1;
     while(++i < size)
     {
-        node = get_best_move(*a, *b);
+        node =get_best_move(*a, *b);
         get_operation(a, b, node);
         pa(a, b);
     }
@@ -88,16 +87,16 @@ void get_stack_a_sorted(t_stack **a, int size)
     if(index == size - index)
     {
         while((*a)->data != min_a)
-            ra(a, 1);
+            ra(a);
     }
-    else  if(index > size - index)
+    else if(index > size - index)
     {
         while((*a)->data != min_a)
-            rra(a, 1);      
+            rra(a);      
     }
     else
     {
         while((*a)->data != min_a)
-        ra(a, 1);
+        ra(a);
     }
 }

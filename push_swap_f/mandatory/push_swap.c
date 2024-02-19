@@ -26,23 +26,8 @@ void display_a(t_stack *a)
         printf("\n");
 
 }
-void f(void)
-{
-            system("leaks push_swap");
 
-}
-int is_sorted(t_stack *a)
-{
-    if(!a)
-        return (1);
-    while(a->next)
-    {
-        if(a->data > a->next->data)
-            return (0);
-        a = a->next;
-    }
-    return 1;
-}
+
 void display_b(t_stack *b)
 {
     printf("stack b:\n");
@@ -82,10 +67,6 @@ static void sort_data(t_stack **a, t_stack **b, int size, int  median)
         final_case(a, b);
     }
 }
-void sig_handle(int sig)
-{
-    (void)sig;
-}
 
 int main(int ac, char *av[])
 {
@@ -95,9 +76,6 @@ int main(int ac, char *av[])
     int size;
     int median;
     
-    // signal(SIGUSR1, sig_handle);
-    // printf("PID : %d\n", getpid());
-    // atexit(f);
     i = 0;
     a = NULL;
     b = NULL;

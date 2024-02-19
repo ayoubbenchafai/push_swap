@@ -6,24 +6,25 @@
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:45:29 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/18 18:34:52 by aben-cha         ###   ########.fr       */
+/*   Updated: 2024/02/19 20:19:02 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void sort_two(t_stack **a)
+void	 sort_two(t_stack **a)
 {
-    if(!(*a))
-        return ;
-    if(((*a)->data) > ((*a)->next->data))
-            sa(a, 1);
-    else    
-        return ;
+	if (!(*a))
+		return ;
+	if (((*a)-> data) > ((*a)-> next-> data))
+		sa(a, 1);
+	else
+		return ;
 }
-void sort_three(t_stack **a)
+
+void	sort_three(t_stack **a)
 {
-    int max;
+	int max;
     
     if(!(*a))
         return ;
@@ -47,22 +48,17 @@ void opeartion1_a(t_stack **a, t_best_move node)
         return ;
     int size = ft_lstsize(*a);
     int index = get_index_of_node(*a, node.val_a);
-    // if (index == -1)
-    // {
-    //     printf("val %d\n", node.val_a);
-    //     display_a(*a);
-    //     pause();
-    // }
-    if(node.move_a == 0) // ra
+
+    if(node.move_a == 0)
     {
         while(index--)
-            ra(a,1);
+            ra(a, 1);
     }
-    else if(node.move_a == 1) // rra
+    else if(node.move_a == 1)
     {
         size = size - index;
         while(size--)
-            rra(a,1);
+            rra(a, 1);
     }
     else
         return ;
@@ -74,16 +70,16 @@ void opeartion1_b(t_stack **b, t_best_move node)
     int size = ft_lstsize(*b);
     int index = get_index_of_node(*b, node.val_b);
 
-    if(node.move_b == 0) // ra
+    if(node.move_b == 0)
     {
         while(index--)
-            rb(b,1);
+            rb(b, 1);
     }
-    else if(node.move_b == 1) // rra
+    else if(node.move_b == 1)
     {
         size = size - index;
         while(size--)
-            rrb(b,1);
+            rrb(b, 1);
     }
     else
         return ;

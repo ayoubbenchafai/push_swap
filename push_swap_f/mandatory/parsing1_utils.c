@@ -6,120 +6,107 @@
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:18:20 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/18 13:47:04 by aben-cha         ###   ########.fr       */
+/*   Updated: 2024/02/19 20:01:18 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int  check_min_max(long result, int sign)
+int	check_min_max(long result, int sign)
 {
-    if(result > INT_MAX && result != 2147483648)
-    {
-        ft_putstr("Error\n");
-        return(1);
-    }
-    if(result == 2147483648 && sign == 1)
-    {
-        ft_putstr("Error\n");
-        return(1);
-    }    
-    return (0);
-}
-
-int	ft_atoi(const char *str)
-{
-	int     i;
-	int     sign;
-	long    result;
-
-	i = 0;
-	sign = 1;
-	result = 0;
-	if (str[i] == '-' || str[i] == '+')
+	if (result > INT_MAX && result != 2147483648)
 	{
-		if (str[i] == '-')
-			sign *= -1;
-		i++;
+		write(2, "Error\n", 6);
+		return (1);
 	}
-	while (str[i] >= '0' && str[i] <= '9')
+	if (result == 2147483648 && sign == 1)
 	{
-		result = (result * 10) + str[i] - '0';
-		i++;
+		write(2, "Error\n", 6);
+		return (1);
 	}
-    if(check_min_max(result, sign))
-        exit (-1);
-	return (sign * (int)result);
+	return (0);
 }
 
-void case_one(char **res, char *av, int count_words, t_stack **stack)
+int	add_to_stack(t_stack **stack, char *res)
 {
-    int i;
-    int n;
-    t_stack *new;
-    
-    i = -1;
-    res = ft_split(av, ' ');
-    if(!res)
-        exit(-1);
-    while(++i < count_words)
-    {
+	int		n;
+	t_stack	*new;
+	t_stack	*p_new;
 
-        if(check_char(res[i]))
-            free_data(res, stack, new, 0);
-        n = ft_atoi(res[i]);
-        new = ft_lstnew(n);
-        if(!new)
-            exit(-1);
-        if(is_double(*stack, n))
-            free_data(res, stack, new, 1);
-        ft_lstadd_back(stack, new);
-    }
-    free_array(res);
-    //free(new);
-}
-int spaces(char *s)
-{
-    int i = 0;
-    int len_s = ft_strlen(s);
-    while(s[i])
-    {
-        if(!(s[i] == ' '))
-            return (0);
-        i++;
-    }
-    if(i == len_s)
-        return (1);
-    return (0);   
-}
-void case_two(char **res, char *av, t_stack **stack)
-{
-    int n;
-    t_stack *new = NULL;
-    res = ft_split(av, ' ');
-    if(!res)
-        exit(-1);
-    if(spaces(av) || check_char(res[0]))
-        free_data(res, stack, new, 1);
-    n = ft_atoi(res[0]);
-    new = ft_lstnew(n);
-    if(!new)
-        exit(-1);
-    if(is_double(*stack, n))
-        free_data(res, stack, new, 1);
-    ft_lstadd_back(stack, new);
-    free_array(res);
+	new = NULL;
+	if (check_char(res))
+		return (write(2, "Error\n", 6), 1);
+	n = ft_atoi(res);
+	new = ft_lstnew(n);
+	p_new = new;
+	if (!new)
+		return (free(p_new), 1);
+	if (is_double(*stack, n))
+		return (free(new), write(2, "Error\n", 6), 1);
+	ft_lstadd_back(stack, new);
+	return (0);
 }
 
-void parsing(char *av, t_stack **stack, char c)
+int	case_one(char **res, char *av, int count_words, t_stack **stack)
 {
-    char **res;
-    int count_words;
+	int		i;
+	char	**p;
 
-    res = NULL;
-    count_words = nbr_strings(av, c);
-    if(count_words > 1)
-        case_one(res, av, count_words, stack);   
-    else
-        case_two(res, av, stack);        
+	i = -1;
+	res = ft_split(av, ' ');
+	p = res;
+	if (!res)
+		return (free_array(p), 1);
+	while (++i < count_words)
+	{
+		if (add_to_stack(stack, res[i]))
+			return (1);
+	}
+	return (free_array(res), 0);
+}
+
+int	case_two(char **res, char *av, t_stack **stack)
+{
+	int		n;
+	char	**p;
+	t_stack	*new;
+	t_stack	*p_new;
+
+	new = NULL;
+	res = ft_split(av, ' ');
+	p = res;
+	if (!res)
+		return (free_array(p), 1);
+	if (check_char(res[0]))
+		return (free_data(res, stack, new, 0), 1);
+	n = ft_atoi(res[0]);
+	new = ft_lstnew(n);
+	p_new = new;
+	if (!new)
+		return (free(p_new), 1);
+	if (is_double(*stack, n))
+		return (free_data(res, stack, new, 1), 1);
+	ft_lstadd_back(stack, new);
+	free_array(res);
+	return (0);
+}
+
+int	parsing(char *av, t_stack **stack, char c)
+{
+	char	**res;
+	int		count_words;
+
+	res = NULL;
+	count_words = nbr_strings(av, c);
+	if (count_words > 1)
+	{
+		if (case_one(res, av, count_words, stack))
+			return (1);
+	}
+	else
+	{
+		if (case_two(res, av, stack))
+			return (1);
+	}
+	return (0);
 }
