@@ -9,8 +9,7 @@ SRC = mandatory/push_swap.c mandatory/ft_split.c mandatory/parsing1_utils.c  man
 	mandatory/functions_utils8.c mandatory/functions_utils9.c mandatory/functions_utils10.c
 SRCB = bonus/checker_bonus.c bonus/ft_split_bonus.c bonus/parsing_bonus.c  bonus/functions_utils1_bonus.c \
 	bonus/functions_utils2_bonus.c bonus/functions_utils3_bonus.c bonus/functions_utils4_bonus.c \
-	bonus/functions_utils5_bonus.c bonus/functions_utils6_bonus.c bonus/functions_utils7_bonus.c \
-	bonus/functions_utils8_bonus.c bonus/functions_utils9_bonus.c bonus/functions_utils10_bonus.c \
+	bonus/functions_utils5_bonus.c bonus/functions_utils6_bonus.c \
 	bonus/gnl_utils_bonus.c bonus/get_next_line_bonus.c
 
 OBJ = $(SRC:.c=.o)
