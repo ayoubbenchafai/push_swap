@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing1_utils.c                                   :+:      :+:    :+:   */
+/*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:18:20 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/19 20:01:18 by aben-cha         ###   ########.fr       */
+/*   Updated: 2024/02/19 22:28:01 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	check_min_max(long result, int sign)
 	return (0);
 }
 
-int	add_to_stack(t_stack **stack, char *res)
+void	add_to_stack(t_stack **stack, char *res)
 {
 	int		n;
 	t_stack	*new;
@@ -35,16 +35,16 @@ int	add_to_stack(t_stack **stack, char *res)
 
 	new = NULL;
 	if (check_char(res))
-		return (write(2, "Error\n", 6), 1);
+		return (write(2, "Error\n", 6), exit(1));
 	n = ft_atoi(res);
 	new = ft_lstnew(n);
 	p_new = new;
 	if (!new)
-		return (free(p_new), 1);
+		return (free(p_new), exit(1));
 	if (is_double(*stack, n))
-		return (free(new), write(2, "Error\n", 6), 1);
+		return (free(new), write(2, "Error\n", 6), exit(1));
 	ft_lstadd_back(stack, new);
-	return (0);
+	return ;
 }
 
 int	case_one(char **res, char *av, int count_words, t_stack **stack)
@@ -58,10 +58,7 @@ int	case_one(char **res, char *av, int count_words, t_stack **stack)
 	if (!res)
 		return (free_array(p), 1);
 	while (++i < count_words)
-	{
-		if (add_to_stack(stack, res[i]))
-			return (1);
-	}
+		add_to_stack(stack, res[i]);
 	return (free_array(res), 0);
 }
 

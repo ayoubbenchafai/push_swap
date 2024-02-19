@@ -1,32 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   functions_utils6_bonus.c                           :+:      :+:    :+:   */
+/*   functions_utils7.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 22:20:54 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/19 17:36:34 by aben-cha         ###   ########.fr       */
+/*   Updated: 2024/02/19 23:15:53 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker_bonus.h"
-
-int	find_min_greater_than(t_stack *a, int val)
-{
-	int		res;
-	t_stack	*r;
-	t_stack	*tmp;
-
-	r = a;
-	tmp = get_greater_values(a, val);
-	if (tmp == NULL)
-		res = min_stack_a(r);
-	else
-		res = min_stack_a(tmp);
-	ft_lstclear(&tmp);
-	return (res);
-}
+#include "push_swap.h"
 
 t_stack	*get_greater_values(t_stack *a, int val)
 {
@@ -50,6 +34,22 @@ t_stack	*get_greater_values(t_stack *a, int val)
 		a = a -> next;
 	}
 	return (tmp);
+}
+
+int	find_min_greater_than(t_stack *a, int val)
+{
+	int		res;
+	t_stack	*r;
+	t_stack	*tmp;
+
+	r = a;
+	tmp = get_greater_values(a, val);
+	if (tmp == NULL)
+		res = min_stack_a(r);
+	else
+		res = min_stack_a(tmp);
+	ft_lstclear(&tmp);
+	return (res);
 }
 
 int	get_index_of_node(t_stack *s, int val)

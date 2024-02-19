@@ -6,7 +6,7 @@
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 18:34:08 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/19 20:17:29 by aben-cha         ###   ########.fr       */
+/*   Updated: 2024/02/19 23:01:24 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ void	sa(t_stack **a, int vlag)
 	if (!(*a) || !(*a)-> next)
 		return ;
 	swap(&(*a)-> data, &(*a)-> next -> data);
-    if(vlag == 1)
-        ft_putstr("sa\n");
+	if (vlag == 1)
+		write(1, "sa\n", 3);
 }
 
 void	sb(t_stack **b, int vlag)
@@ -46,13 +46,13 @@ void	sb(t_stack **b, int vlag)
 	if (!(*b) || !(*b)-> next)
 		return ;
 	swap(&(*b)-> data, &(*b)-> next -> data);
-    if(vlag == 1)
-        ft_putstr("sb\n");
+	if (vlag == 1)
+		write(1, "sb\n", 3);
 }
 
 void	ss(t_stack **a, t_stack **b)
 {
 	sa(a, 1);
 	sa(b, 1);
-    ft_putstr("ss\n");
+	write(1, "ss\n", 3);
 }

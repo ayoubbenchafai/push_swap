@@ -6,16 +6,26 @@
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:28:52 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/13 18:03:13 by aben-cha         ###   ########.fr       */
+/*   Updated: 2024/02/19 22:59:16 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_putstr(char *s)
+int	min_stack_a(t_stack *a)
 {
-    while (*s != '\0')
-        write(1, s++, 1);
+	int	min;
+
+	if (!(a))
+		return (-1);
+	min = a->data;
+	while (a)
+	{
+		if (min > a -> data)
+			min = a -> data;
+		a = a -> next;
+	}
+	return (min);
 }
 
 size_t	ft_strlen(const char *s)
@@ -49,25 +59,25 @@ char	*ft_strdup(const char *s)
 	return (tab);
 }
 
-void free_array(char **av)
+void	free_array(char **av)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while(av[i])
-    {
-        free(av[i]);
-        i++;
-    }
-    free(av);
+	i = 0;
+	while (av[i])
+	{
+		free(av[i]);
+		i++;
+	}
+	free(av);
 }
 
-void free_data(char **res ,t_stack **stack, t_stack *new, int vlag)
+void	free_data(char **res, t_stack **stack, t_stack *new, int vlag)
 {
-    ft_putstr("Error\n");
-    free_array(res);
-    ft_lstclear(stack);
-    if(vlag == 1)
-        free(new);
-    exit(-1);
+	write(2, "Error\n", 6);
+	free_array(res);
+	ft_lstclear(stack);
+	if (vlag == 1)
+		free(new);
+	exit(1);
 }

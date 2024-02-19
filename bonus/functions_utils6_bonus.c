@@ -6,7 +6,7 @@
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 23:29:24 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/19 18:20:07 by aben-cha         ###   ########.fr       */
+/*   Updated: 2024/02/19 23:45:26 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,8 @@ int	read_instructions(t_stack *a, t_stack *b)
 			if (is_sorted(a) && !b)
 				return (ft_lstclear(&a), write(1, "OK\n", 3), 0);
 			else
-				return (ft_lstclear(&a), ft_lstclear(&b), write(1, "KO\n", 3), 1);
+				return (ft_lstclear(&a),
+					ft_lstclear(&b), write(1, "KO\n", 3), 1);
 		}
 		if (apply_instructions(&a, &b, s))
 			return (free(s), ft_lstclear(&b), ft_lstclear(&a), 1);

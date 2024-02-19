@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   functions_utils7_bonus.c                           :+:      :+:    :+:   */
+/*   functions_utils8.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:24:10 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/19 16:30:21 by aben-cha         ###   ########.fr       */
+/*   Updated: 2024/02/19 23:16:41 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker_bonus.h"
+#include "push_swap.h"
 
 int	set_operation(int move_a, int move_b)
 {
@@ -51,7 +51,7 @@ void	operation2_rr(t_stack **a, t_stack **b, int i_a, int i_b)
 		while (i_b--)
 			rr(a, b);
 		while (c--)
-			ra(a);
+			ra(a, 1);
 	}
 	else if (i_a < i_b)
 	{
@@ -59,7 +59,7 @@ void	operation2_rr(t_stack **a, t_stack **b, int i_a, int i_b)
 		while (i_a--)
 			rr(a, b);
 		while (c--)
-			rb(b);
+			rb(b, 1);
 	}
 }
 
@@ -78,7 +78,7 @@ void	operation2_rrr(t_stack **a, t_stack **b, int i_a, int i_b)
 		while (i_b--)
 			rrr(a, b);
 		while (c--)
-			rra(a);
+			rra(a, 1);
 	}
 	else if (i_a < i_b)
 	{
@@ -86,7 +86,7 @@ void	operation2_rrr(t_stack **a, t_stack **b, int i_a, int i_b)
 		while (i_a--)
 			rrr(a, b);
 		while (c--)
-			rrb(b);
+			rrb(b, 1);
 	}
 }
 
