@@ -5,93 +5,98 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/14 16:45:29 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/15 18:48:47 by aben-cha         ###   ########.fr       */
+/*   Created: 2024/02/14 16:49:07 by aben-cha          #+#    #+#             */
+/*   Updated: 2024/02/19 15:49:49 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker_bonus.h"
 
-void sort_two(t_stack **a)
+int max_stack_a(t_stack *a)
 {
-    if(!(*a))
-        return ;
-    if(((*a)->data) > ((*a)->next->data))
-            sa(a);
-    else    
-        return ;
+    if(!(a))
+        return (-1);
+    int max = a->data;
+    while(a)
+    {
+        if(max < a->data)
+            max = a->data;
+        a = a -> next;
+    }
+    return (max);
 }
-void sort_three(t_stack **a)
+t_best_move     set_best_move(t_stack *a, t_stack *b, int val_b)
 {
-    int max;
+    t_best_move node;
+    
+    node.val_b = val_b;
+    node.val_a = find_min_greater_than(a, node.val_b);
+    node.cost_a = get_cost(a, node.val_a);
+    node.cost_b = get_cost(b, node.val_b);
+    if(node.cost_a == 0)
+        node.move_a = 2;
+    else
+        node.move_a = get_move(a, node.val_a);
+    
+    if(node.cost_b == 0)
+        node.move_b = 2;
+    else
+        node.move_b = get_move(b, node.val_b);
+    node.operation = set_operation(node.move_a, node.move_b);
+    node.cost_ab = set_cost_ab(node.move_a, node.move_b, node.cost_a, node.cost_b);
+    return (node);
+}
+t_best_move     get_best_move(t_stack *a, t_stack *b)
+{
+    t_stack *tmp;
+    
+    tmp = b;
+    t_best_move node = set_best_move(a, b, tmp->data);
+    while(tmp)
+    {
+        t_best_move node1 = set_best_move(a, b, tmp->data);
+        if(node.cost_ab > node1.cost_ab)
+            node =node1;
+        tmp = tmp->next;
+    }
+    return node;
+}
+void            final_case(t_stack **a, t_stack **b)
+{
+    t_best_move node;
+    int i ;
+    int size; 
+    size = ft_lstsize(*b);
+    i= -1;
+    while(++i < size)
+    {
+        node =get_best_move(*a, *b);
+        get_operation(a, b, node);
+        pa(a, b);
+    }
+}
+void get_stack_a_sorted(t_stack **a, int size)
+{
+    int min_a; 
+    int index; 
     
     if(!(*a))
         return ;
-    max = max_stack_a(*a);
-    if((*a)->data == max)
+    min_a = min_stack_a(*a);
+    index = get_index_of_node(*a, min_a);
+    if(index == size - index)
     {
-        ra(a);
-        sort_two(a);
-    }
-    else if((*a)->next->data == max)
-    {
-        rra(a);
-        sort_two(a);
-    }
-    else    
-        sort_two(a);
-}
-void opeartion1_a(t_stack **a, t_best_move node)
-{
-    if(!(*a))
-        return ;
-    int size = ft_lstsize(*a);
-    int index = get_index_of_node(*a, node.val_a);
-
-    if(node.move_a == 0) // ra
-    {
-        while(index--)
+        while((*a)->data != min_a)
             ra(a);
     }
-    else if(node.move_a == 1) // rra
+    else if(index > size - index)
     {
-        size = size - index;
-        while(size--)
-            rra(a);
+        while((*a)->data != min_a)
+            rra(a);      
     }
     else
-        return ;
-}
-void opeartion1_b(t_stack **b, t_best_move node)
-{
-    if(!(*b))
-        return ;
-    int size = ft_lstsize(*b);
-    int index = get_index_of_node(*b, node.val_b);
-
-    if(node.move_b == 0) // ra
     {
-        while(index--)
-            rb(b);
+        while((*a)->data != min_a)
+        ra(a);
     }
-    else if(node.move_b == 1) // rra
-    {
-        size = size - index;
-        while(size--)
-            rrb(b);
-    }
-    else
-        return ;
-}
-int set_cost_ab(int move_a, int move_b, int cost_a, int cost_b)
-{
-    if(move_a == move_b)
-    {
-        if(cost_a  > cost_b)
-            return (cost_a + 1);
-        else    
-            return (cost_b + 1);
-    }
-    else
-        return (cost_a + cost_b + 1);
 }

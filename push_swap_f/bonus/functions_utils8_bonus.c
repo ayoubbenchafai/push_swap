@@ -5,95 +5,94 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/14 16:24:10 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/15 18:48:21 by aben-cha         ###   ########.fr       */
+/*   Created: 2024/02/14 16:45:29 by aben-cha          #+#    #+#             */
+/*   Updated: 2024/02/19 16:37:36 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker_bonus.h"
 
-int  set_operation(int move_a, int move_b)
+void	 sort_two(t_stack **a)
 {
-    if(move_a != move_b)
-        return (0);// different r or rr (a or b)
-    else
-    {
-        if (move_a == 0)
-            return (1);// means move each one of the top using r.
-        else 
-            return (2);// means move each one of the top using rr
-    }
+	if (!(*a))
+		return ;
+	if (((*a)-> data) > ((*a)-> next-> data))
+		sa(a);
+	else
+		return ;
 }
-void get_operation(t_stack **a, t_stack **b, t_best_move node)
+
+void	sort_three(t_stack **a)
 {
-    if(node.operation == 0)
-    {
-        opeartion1_a(a, node);
-        opeartion1_b(b, node);  
-    }
-    else
-    {
-        operation2(a, b, node);        
-    }
-}
-void operation2_rr(t_stack **a, t_stack **b, int i_a, int  i_b)
-{
-    int c;
+	int max;
     
-    if(i_a == i_b)
+    if(!(*a))
+        return ;
+    max = max_stack_a(*a);
+    if((*a)->data == max)
     {
-        while(i_a--)
-        rr(a,b);
+        ra(a);
+        sort_two(a);
     }
-    else if(i_a > i_b)
+    else if((*a)->next->data == max)
     {
-        c = i_a - i_b;
-        while(i_b--)
-            rr(a, b);
-        while(c--)
+        rra(a);
+        sort_two(a);
+    }
+    else    
+        sort_two(a);
+}
+void opeartion1_a(t_stack **a, t_best_move node)
+{
+    if(!(*a))
+        return ;
+    int size = ft_lstsize(*a);
+    int index = get_index_of_node(*a, node.val_a);
+
+    if(node.move_a == 0) // ra
+    {
+        while(index--)
             ra(a);
     }
-    else if(i_a < i_b)
+    else if(node.move_a == 1) // rra
     {
-        c = i_b -i_a;
-        while(i_a--)
-            rr(a, b);
-        while(c--)
-            rb(b);
-    }
-}
-void operation2_rrr(t_stack **a, t_stack **b, int i_a, int  i_b)
-{
-    int c;
-    
-    if(i_a == i_b)
-    {
-        while(i_a--)
-            rrr(a,b);
-        }
-    else if(i_a > i_b)
-    {
-        c = i_a - i_b;
-        while(i_b--)
-            rrr(a, b);
-        while(c--)
+        size = size - index;
+        while(size--)
             rra(a);
     }
-    else if(i_a < i_b)
+    else
+        return ;
+}
+void opeartion1_b(t_stack **b, t_best_move node)
+{
+    if(!(*b))
+        return ;
+    int size = ft_lstsize(*b);
+    int index = get_index_of_node(*b, node.val_b);
+
+    if(node.move_b == 0) // ra
     {
-        c = i_b -i_a;
-        while(i_a--)
-            rrr(a, b);
-        while(c--)
+        while(index--)
+            rb(b);
+    }
+    else if(node.move_b == 1) // rra
+    {
+        size = size - index;
+        while(size--)
             rrb(b);
     }
-}
-void operation2(t_stack **a, t_stack **b, t_best_move node)
-{
-    if(node.operation == 1)
-        operation2_rr(a, b, node.cost_a, node.cost_b);
-    else if(node.operation == 2)
-        operation2_rrr(a, b, node.cost_a, node.cost_b);
-    else 
+    else
         return ;
+}
+int set_cost_ab(int move_a, int move_b, int cost_a, int cost_b)
+{
+    if(move_a == move_b)
+    {
+        if(cost_a  > cost_b)
+            return (cost_a + 1);
+        else    
+            return (cost_b + 1);
+    }
+    else
+        return (cost_a + cost_b + 1);
 }

@@ -5,98 +5,97 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/14 16:49:07 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/15 18:41:07 by aben-cha         ###   ########.fr       */
+/*   Created: 2024/02/17 23:29:24 by aben-cha          #+#    #+#             */
+/*   Updated: 2024/02/19 15:56:16 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker_bonus.h"
-
-int max_stack_a(t_stack *a)
+int min_stack_a(t_stack *a)
 {
+    int min;
+    
     if(!(a))
         return (-1);
-    int max = a->data;
+    min = a->data;
     while(a)
     {
-        if(max < a->data)
-            max = a->data;
+        if(min > a->data)
+            min = a->data;
         a = a -> next;
     }
-    return (max);
+    return (min);
 }
-t_best_move     set_best_move(t_stack *a, t_stack *b, int val_b)
+int	ft_strcmp(char *s1, char *s2)
 {
-    t_best_move node;
-    
-    node.val_b = val_b;
-    node.val_a = get_max(a, node.val_b);
-    node.cost_a = get_cost(a, node.val_a);
-    node.cost_b = get_cost(b, node.val_b);
-    if(node.cost_a == 0)
-        node.move_a = 2;
+	size_t	i;
+
+	i = 0;
+	while (s1[i] || s2[i])
+	{
+		if (s1[i] != s2[i])
+			return (s1[i] - s2[i]);
+		i++;
+	}
+	return (0);
+}
+int apply_instructions(t_stack **a,t_stack **b, char *s)
+{ 
+    if(!ft_strcmp(s, "sa\n"))
+        return (sa(a), 0);    
+    else if(!ft_strcmp(s, "sb\n"))
+        return (sb(b), 0); 
+    else if(!ft_strcmp(s, "ss\n"))
+        return (ss(a,b), 0); 
+    else if(!ft_strcmp(s, "pb\n"))
+        return (pb(a,b), 0);
+    else if(!ft_strcmp(s, "pa\n"))
+        return (pa(a,b), 0);  
+    else if(!ft_strcmp(s, "ra\n"))
+        return (ra(a), 0);  
+    else if(!ft_strcmp(s, "rb\n"))
+        return(rb(b), 0);   
+    else if(!ft_strcmp(s, "rr\n"))
+        return(rr(a,b), 0);  
+    else if(!ft_strcmp(s, "rra\n"))
+        return (rra(a), 0);   
+    else if(!ft_strcmp(s, "rrb\n"))
+        return (rrb(b), 0);  
+    else if(!ft_strcmp(s, "rrr\n"))
+        return (rrr(a,b), 0);
     else
-        node.move_a = get_move(a, node.val_a);
-    
-    if(node.cost_b == 0)
-        node.move_b = 2;
-    else
-        node.move_b = get_move(b, node.val_b);
-    node.operation = set_operation(node.move_a, node.move_b);
-    node.cost_ab = set_cost_ab(node.move_a, node.move_b, node.cost_a, node.cost_b);
-    return (node);
+        return (write(2, "Error\n", 6) ,1);    
 }
-t_best_move     get_best_move(t_stack *a, t_stack *b)
+int is_sorted(t_stack *a)
 {
-    t_stack *tmp;
-    
-    tmp = b;
-    t_best_move node = set_best_move(a, b, tmp->data);
-    while(tmp)
+    if(!a || !a->next)
+        return (1);
+    while(a->next)
     {
-        t_best_move node1 = set_best_move(a, b, tmp->data);
-        if(node.cost_ab > node1.cost_ab)
-            node =node1;
-        tmp = tmp->next;
+        if((a->data) > (a->next->data))
+            return (0);
+        a = a->next;
     }
-    return node;
+    return 1;
 }
-void            final_case(t_stack **a, t_stack **b)
+int read_instructions(t_stack *a, t_stack *b)
 {
-    t_best_move node;
-    int i ;
-    int size; 
-    size = ft_lstsize(*b);
-    i= -1;
-    while(++i < size)
+    char *s;
+    char *p;
+    while (1)
     {
-        node =get_best_move(*a, *b);
-        get_operation(a, b, node);
-        pa(a, b);
+        s = get_next_line(0);
+        p = s;
+        if(!s)
+        {  
+            if(is_sorted(a) && !b)
+                return (ft_lstclear(&a),write(1, "OK\n", 3), 0);
+            else
+                return (ft_lstclear(&a),ft_lstclear(&b), write(1, "KO\n", 3), 1);
+        }
+        if(apply_instructions(&a, &b, s))
+                return (free(s),ft_lstclear(&b), ft_lstclear(&a), 1);
+        free(s);
     }
-}
-void get_stack_a_sorted(t_stack **a, int size)
-{
-    int min_a; 
-    int index; 
-    
-    if(!(*a))
-        return ;
-    min_a = min_stack_a(*a);
-    index = get_index_of_node(*a, min_a);
-    if(index == size - index)
-    {
-        while((*a)->data != min_a)
-            ra(a);
-    }
-    else if(index > size - index)
-    {
-        while((*a)->data != min_a)
-            rra(a);      
-    }
-    else
-    {
-        while((*a)->data != min_a)
-        ra(a);
-    }
+    return (0);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing1_utils_bonus.c                             :+:      :+:    :+:   */
+/*   parsing_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:18:20 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/18 15:57:57 by aben-cha         ###   ########.fr       */
+/*   Updated: 2024/02/19 16:32:49 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@ int  check_min_max(long result, int sign)
 {
     if(result > INT_MAX && result != 2147483648)
     {
-        ft_putstr("Error\n", 2);
+        write(2, "Error\n", 6);
         return(1);
     }
     if(result == 2147483648 && sign == 1)
     {
-        ft_putstr("Error\n", 2);
+        write(2, "Error\n", 6);
         return(1);
     }    
     return (0);
@@ -33,14 +33,14 @@ int add_to_stack(t_stack **stack, char *res)
     
     new = NULL;
     if(check_char(res))
-        return (ft_putstr("Error\n", 2), 1);
+        return (write(2, "Error\n", 6), 1);
     n = ft_atoi(res);
     new = ft_lstnew(n);
     p_new = new;
     if(!new)
         return (free(p_new), 1);
     if(is_double(*stack, n))
-        return (free(new), ft_putstr("Error\n", 2), 1);
+        return (free(new), write(2, "Error\n", 6), 1);
     ft_lstadd_back(stack, new);
     return (0);
 }
