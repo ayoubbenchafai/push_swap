@@ -6,7 +6,7 @@
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 23:29:24 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/19 23:45:26 by aben-cha         ###   ########.fr       */
+/*   Updated: 2024/02/20 22:15:09 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,10 @@ int	is_sorted(t_stack *a)
 int	read_instructions(t_stack *a, t_stack *b)
 {
 	char	*s;
-	char	*p;
 
 	while (1)
 	{
 		s = get_next_line(0);
-		p = s;
 		if (!s)
 		{
 			if (is_sorted(a) && !b)

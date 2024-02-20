@@ -6,7 +6,7 @@
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 22:20:54 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/19 23:15:53 by aben-cha         ###   ########.fr       */
+/*   Updated: 2024/02/20 22:59:45 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ t_stack	*get_greater_values(t_stack *a, int val)
 			new = ft_lstnew(a -> data);
 			if (!new)
 			{
-				ft_lstclear(&tmp);
+				if (tmp)
+					ft_lstclear(&tmp);
 				ft_lstclear(&a);
 				exit(1);
 			}

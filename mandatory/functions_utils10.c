@@ -6,7 +6,7 @@
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 16:49:07 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/19 23:33:41 by aben-cha         ###   ########.fr       */
+/*   Updated: 2024/02/20 22:58:52 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,4 +108,5 @@ void	get_stack_a_sorted(t_stack **a, int size)
 		while ((*a)-> data != min_a)
 			ra(a, 1);
 	}
+	ft_lstclear(a);
 }

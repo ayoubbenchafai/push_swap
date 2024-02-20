@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_bonus.c                                    :+:      :+:    :+:   */
+/*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:18:20 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/20 22:52:26 by aben-cha         ###   ########.fr       */
+/*   Updated: 2024/02/20 23:01:18 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker_bonus.h"
+#include "push_swap.h"
 
 int	check_min_max(long result, int sign)
 {
@@ -52,4 +52,44 @@ int	parsing(char *av, t_stack **stack, char c)
 	}
 	free_array(res);
 	return (0);
+}
+
+int	is_sorted(t_stack *a)
+{
+	if (!a || !(a -> next))
+		return (1);
+	while (a -> next)
+	{
+		if ((a -> data) > (a -> next -> data))
+			return (0);
+		a = a -> next;
+	}
+	return (1);
+}
+
+void	sort_data(t_stack **a, t_stack **b, int size, int median)
+{
+	int	i;
+
+	if (!(*a))
+		return ;
+	if (size == 2)
+		sort_two(a);
+	else if (size == 3)
+		sort_three(a);
+	else
+	{
+		i = -1;
+		while (++i < size - 3)
+		{
+			pb(a, b);
+			if (ft_lstsize(*b) >= 2)
+			{
+				if ((*b)->data < median)
+					rb(b, 1);
+			}
+		}
+		sort_three(a);
+		final_case(a, b);
+	}
 }

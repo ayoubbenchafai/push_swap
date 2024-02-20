@@ -3,7 +3,7 @@ NAME_B = checker
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
-SRC = mandatory/push_swap.c mandatory/ft_split.c mandatory/parsing_utils.c  mandatory/functions_utils1.c \
+SRC = mandatory/push_swap.c mandatory/ft_split.c mandatory/parsing.c  mandatory/functions_utils1.c \
 	mandatory/functions_utils2.c mandatory/functions_utils3.c mandatory/functions_utils4.c \
 	mandatory/functions_utils5.c mandatory/functions_utils6.c mandatory/functions_utils7.c \
 	mandatory/functions_utils8.c mandatory/functions_utils9.c mandatory/functions_utils10.c
@@ -17,11 +17,17 @@ OBJB = $(SRCB:.c=.o)
 
 all: $(NAME_M)
 
-$(NAME_M): $(OBJ) mandatory/push_swap.h
+$(NAME_M): $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -o $(NAME_M)
 
-bonus: $(OBJB) bonus/checker_bonus.h
+bonus: $(OBJB)
 	$(CC) $(CFLAGS) $(OBJB) -o $(NAME_B)
+
+mandatory/%.o: mandatory/%.c mandatory/push_swap.h
+	$(CC) $(CFLAGS) -c $< -o $@
+
+bonus/%.o: bonus/%.c bonus/checker_bonus.h
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	rm -f $(OBJ) $(OBJB)

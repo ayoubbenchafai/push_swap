@@ -6,7 +6,7 @@
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 23:13:15 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/19 19:13:03 by aben-cha         ###   ########.fr       */
+/*   Updated: 2024/02/20 22:39:12 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,6 @@ int		apply_instructions(t_stack **a, t_stack **b, char *s);
 int		is_sorted(t_stack *a);
 int		read_instructions(t_stack *a, t_stack *b);
 int		check_min_max(long result, int sign);
-int		add_to_stack(t_stack **stack, char *res);
-int		case_one(char **res, char *av, int count_words, t_stack **stack);
-int		case_two(char **res, char *av, t_stack **stack);
 int		parsing(char *av, t_stack **stack, char c);
 
 #endif

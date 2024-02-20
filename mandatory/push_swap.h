@@ -6,7 +6,7 @@
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 21:49:47 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/19 23:42:42 by aben-cha         ###   ########.fr       */
+/*   Updated: 2024/02/20 23:02:52 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,11 +84,10 @@ t_best_move	get_best_move(t_stack *a, t_stack *b);
 void		final_case(t_stack **a, t_stack **b);
 void		get_stack_a_sorted(t_stack **a, int size);
 int			check_min_max(long result, int sign);
-void		add_to_stack(t_stack **stack, char *res);
-int			case_one(char **res, char *av, int count_words, t_stack **stack);
-int			case_two(char **res, char *av, t_stack **stack);
-int			parsing(char *av, t_stack **stack, char c);
 t_stack		*get_greater_values(t_stack *a, int val);
 int			find_min_greater_than(t_stack *a, int val);
+int			parsing(char *av, t_stack **stack, char c);
+int			is_sorted(t_stack *a);
+void		sort_data(t_stack **a, t_stack **b, int size, int median);
 
 #endif
