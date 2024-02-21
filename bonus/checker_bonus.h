@@ -6,7 +6,7 @@
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 23:13:15 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/20 22:39:12 by aben-cha         ###   ########.fr       */
+/*   Updated: 2024/02/21 23:24:47 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	ft_lstclear(t_stack **lst);
 t_stack	*ft_lst_before_last(t_stack *lst);
 void	ft_lstdel_front(t_stack **lst);
 int		check_char(char *s);
-int		ft_atoi(const char *str);
+long	ft_atoi(const char *str);
 void	free_array(char **av);
 void	free_data(char **res, t_stack **stack, t_stack *new, int vlag);
 void	rra(t_stack **a);
@@ -77,5 +77,6 @@ int		is_sorted(t_stack *a);
 int		read_instructions(t_stack *a, t_stack *b);
 int		check_min_max(long result, int sign);
 int		parsing(char *av, t_stack **stack, char c);
+int		check_errors(char **res, t_stack **stack, t_stack *new, int i);
 
 #endif

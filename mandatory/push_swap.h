@@ -6,7 +6,7 @@
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 21:49:47 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/20 23:02:52 by aben-cha         ###   ########.fr       */
+/*   Updated: 2024/02/21 23:23:00 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void		ft_lstclear(t_stack **lst);
 t_stack		*ft_lst_before_last(t_stack *lst);
 void		ft_lstdel_front(t_stack **lst);
 int			check_char(char *s);
-int			ft_atoi(const char *str);
+long		ft_atoi(const char *str);
 size_t		ft_strlen(const char *s);
 char		*ft_strdup(const char *s);
 void		free_array(char **av);
@@ -89,5 +89,6 @@ int			find_min_greater_than(t_stack *a, int val);
 int			parsing(char *av, t_stack **stack, char c);
 int			is_sorted(t_stack *a);
 void		sort_data(t_stack **a, t_stack **b, int size, int median);
+int			check_errors(char **res, t_stack **stack, t_stack *new, int i);
 
 #endif
