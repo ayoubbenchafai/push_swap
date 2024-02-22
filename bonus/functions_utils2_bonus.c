@@ -6,7 +6,7 @@
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:23:50 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/21 23:21:51 by aben-cha         ###   ########.fr       */
+/*   Updated: 2024/02/22 13:36:46 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,5 +88,5 @@ long	ft_atoi(const char *str)
 	}
 	if (check_min_max(result, sign))
 		return (r);
-	return (sign * (int)result);
+	return ((long)sign * result);
 }
