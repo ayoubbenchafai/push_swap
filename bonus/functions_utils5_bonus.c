@@ -6,7 +6,7 @@
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 18:39:43 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/18 15:51:49 by aben-cha         ###   ########.fr       */
+/*   Updated: 2024/02/22 13:21:37 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,26 @@
 
 void	pb(t_stack **a, t_stack **b)
 {
-	t_stack	*new;
+	t_stack	*ptr;
 
 	if (!(*a))
 		return ;
-	new = ft_lstnew((*a)-> data);
-	if (!new)
-		return ;
-	ft_lstadd_front(b, new);
-	ft_lstdel_front(a);
+	ptr = *a;
+	*a = (*a)-> next;
+	ptr -> next = *b;
+	*b = ptr;
 }
 
 void	pa(t_stack **a, t_stack **b)
 {
-	t_stack	*new;
+	t_stack	*ptr;
 
 	if (!(*b))
 		return ;
-	new = ft_lstnew((*b)->data);
-	if (!new)
-		return ;
-	ft_lstadd_front(a, new);
-	ft_lstdel_front(b);
+	ptr = *b;
+	*b = (*b)-> next;
+	ptr -> next = *a;
+	*a = ptr;
 }
 
 void	ra(t_stack **a)
