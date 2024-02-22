@@ -6,7 +6,7 @@
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:23:50 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/22 13:36:30 by aben-cha         ###   ########.fr       */
+/*   Updated: 2024/02/22 21:49:26 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,10 @@ int	check_char(char *s)
 {
 	if (!s)
 		return (1);
+	if (*s == '-' || *s == '+')
+		s++;
 	while (*s)
 	{
-		if (*s == '-' || *s == '+')
-			s++;
 		if (!(*s >= '0' && *s <= '9'))
 			return (1);
 		s++;
@@ -81,7 +81,7 @@ long	ft_atoi(const char *str)
 			sign *= -1;
 		i++;
 	}
-	while (str[i] >= '0' && str[i] <= '9')
+	while (str[i] >= '0' && str[i] <= '9' && result <= 2147483648)
 	{
 		result = (result * 10) + str[i] - '0';
 		i++;

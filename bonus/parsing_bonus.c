@@ -6,7 +6,7 @@
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:18:20 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/21 23:19:44 by aben-cha         ###   ########.fr       */
+/*   Updated: 2024/02/22 15:19:04 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	parsing(char *av, t_stack **stack, char c)
 	new = NULL;
 	res = ft_split(av, c);
 	if (!res || !res[0])
-		return (write(2, "Error\n", 6), ft_lstclear(stack), 1);
+		return (free_data(res, stack, new, 0), 1);
 	while (res[++i])
 	{
 		if (check_errors(res, stack, new, i))

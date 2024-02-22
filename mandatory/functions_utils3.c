@@ -6,7 +6,7 @@
 /*   By: aben-cha <aben-cha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:28:52 by aben-cha          #+#    #+#             */
-/*   Updated: 2024/02/20 21:32:16 by aben-cha         ###   ########.fr       */
+/*   Updated: 2024/02/22 16:15:22 by aben-cha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,4 @@ void	free_data(char **res, t_stack **stack, t_stack *new, int vlag)
 	ft_lstclear(stack);
 	if (vlag == 1)
 		free(new);
-	exit(1);
 }
